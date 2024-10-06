@@ -1,6 +1,6 @@
 create table articles
 (
-    id         integer               not null
+    id         integer generated always as identity
         constraint articles_pk
             primary key,
     name       varchar               not null,

@@ -1,6 +1,6 @@
 create table list
 (
-    id       integer not null
+    id       integer generated always as identity
         constraint list_pk
             primary key,
     owner_id integer not null

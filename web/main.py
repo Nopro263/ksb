@@ -8,6 +8,8 @@ from sqlmodel import select, insert
 from typing import Sequence
 from utils import Error
 
+from datetime import datetime
+
 app = FastAPI()
 
 @app.get("/users")
@@ -53,3 +55,28 @@ def register(db: DB, user: CreatingUser) -> PrivateUser:
     db.refresh(_user)
 
     return _user
+
+@app.put("/invoice")
+def put_invoice(db: DB) -> Invoice:
+    _invoice = Invoice(creation_time=datetime.now())
+    db.add(_invoice)
+    db.commit()
+    db.refresh(_invoice)
+
+    return _invoice
+
+@app.post("/invoice/{invoice_id:int}")
+def sell_invoice(db: DB, article_id: int, invoice_id: int) -> None:
+    result = db.exec(select(Article).where(Article.id == article_id)).first()
+    
+    result.invoice_id = invoice_id
+
+    db.add(result)
+    db.commit()
+
+@app.get("/invoice/{invoice_id:int}")
+def get_invoice(db: DB, invoice_id: int) -> Sequence[Article]:
+    expr = select(Article).where(Article.invoice_id == invoice_id)
+    result = db.exec(expr)
+
+    return result.fetchall()

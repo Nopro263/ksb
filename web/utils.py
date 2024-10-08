@@ -3,7 +3,7 @@ def Error(description, detail: str = None) -> dict:
         detail = description
     
     return {
-        "description": "Exists already",
+        "description": description,
         "content": {
             "application/json": {
                 "example": {"detail": detail}

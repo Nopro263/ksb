@@ -36,13 +36,13 @@ def token(db: DB, form_data: Annotated[fastapi.security.OAuth2PasswordRequestFor
     return {"access_token": encode(Clearance(user.clearance), user.id), "token_type": "bearer"}
 
 @app.post("/register", responses={
-    409: Error(description="Nickname exists already")
+    409: Error(description="Nickname already exists")
 })
 def register(db: DB, user: CreatingUser) -> PrivateUser:
     result = db.exec(select(User).where(User.nickname == user.nickname))
 
     if result.fetchall():
-        raise HTTPException(status_code=409, detail="Nickname exists already")
+        raise HTTPException(status_code=409, detail="Nickname already exists")
 
     _user = User.model_validate(user)
     _user.password = hash(user.password)

@@ -26,3 +26,5 @@ class CreatingUser(_PrivateUser, _Nickname, _Password):
 
 class User(PrivateUser, _Password, SQLModel, table=True):
     __tablename__ = "users"
+
+    clearance: int = Field(default=10)

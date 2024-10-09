@@ -1,10 +1,13 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Body
 import fastapi.security
 from database import DB
 from schema.user import User, PrivateUser, CreatingUser
 from schema.article import Article
 from schema.invoice import Invoice
 from schema.list import List
+
+from schema.models import ArticleId, ImportResponse
+
 from sqlmodel import select, insert
 from typing import Annotated, Sequence
 from utils import Error, Auth, Clearance, encode
@@ -21,33 +24,6 @@ def hash(d: str) -> str:
     return hashlib.sha512(d).hexdigest()
 
 
-@app.get("/users")
-def get_all_users(db: DB) -> Sequence[PrivateUser]:
-    expr = select(User)
-    result = db.exec(expr)
-
-    return result.fetchall()
-
-@app.get("/articles")
-def get_all_users(db: DB) -> Sequence[Article]:
-    expr = select(Article)
-    result = db.exec(expr)
-
-    return result.fetchall()
-
-@app.get("/invoices")
-def get_all_users(db: DB) -> Sequence[Invoice]:
-    expr = select(Invoice)
-    result = db.exec(expr)
-
-    return result.fetchall()
-
-@app.get("/lists")
-def get_all_users(db: DB) -> Sequence[List]:
-    expr = select(List)
-    result = db.exec(expr)
-
-    return result.fetchall()
 
 @app.post("/token")
 def token(db: DB, form_data: Annotated[fastapi.security.OAuth2PasswordRequestForm, Depends()]) -> dict:
@@ -77,7 +53,7 @@ def register(db: DB, user: CreatingUser) -> PrivateUser:
     return _user
 
 @app.put("/invoice")
-def put_invoice(db: DB) -> Invoice:
+def put_invoice(db: DB, auth: Auth[Clearance.EMPLOYEE]) -> Invoice:
     _invoice = Invoice(creation_time=datetime.now())
     db.add(_invoice)
     db.commit()
@@ -88,15 +64,30 @@ def put_invoice(db: DB) -> Invoice:
 @app.post("/invoice/{invoice_id:int}")
 def sell_invoice(db: DB, article_id: int, invoice_id: int, auth: Auth[Clearance.EMPLOYEE]) -> None:
     result = db.exec(select(Article).where(Article.id == article_id)).first()
-    print(auth)
     result.invoice_id = invoice_id
 
     db.add(result)
     db.commit()
 
 @app.get("/invoice/{invoice_id:int}")
-def get_invoice(db: DB, invoice_id: int) -> Sequence[Article]:
+def get_invoice(db: DB, invoice_id: int, auth: Auth[Clearance.EMPLOYEE]) -> Sequence[Article]:
     expr = select(Article).where(Article.invoice_id == invoice_id)
     result = db.exec(expr)
 
     return result.fetchall()
+
+@app.post("/import")
+def import_article(db: DB, article_id: ArticleId, auth: Auth[Clearance.EMPLOYEE]) -> ImportResponse:
+    expr = select(Article).where(Article.id == article_id.articleId)
+    result = db.exec(expr).one()
+
+    if result.imported:
+        return ImportResponse(**result.model_dump(), has_already_been_imported=True)
+
+    result.imported = True
+
+    db.add(result)
+    db.commit()
+    db.refresh(result)
+
+    return ImportResponse(**result.model_dump(), has_already_been_imported=False)

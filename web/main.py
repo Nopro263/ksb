@@ -8,7 +8,7 @@ from schema.list import List
 
 from schema.models import ArticleId, ImportResponse
 
-from sqlmodel import select, insert
+from sqlmodel import select, insert, or_
 from typing import Annotated, Sequence
 from utils import Error, Auth, Clearance, encode
 import hashlib
@@ -28,7 +28,12 @@ def hash(d: str) -> str:
 @app.post("/token")
 def token(db: DB, form_data: Annotated[fastapi.security.OAuth2PasswordRequestForm, Depends()]) -> dict:
 
-    user = db.exec(select(User).where((User.email == form_data.username or User.nickname == form_data.username) and User.password == hash(form_data.password))).first()
+    user = db.exec(select(User).where(
+        or_(User.email == form_data.username, 
+            User.nickname == form_data.username)
+        ).where(
+            User.password == hash(form_data.password)
+        )).first()
 
     if not user:
         raise HTTPException(status_code=403, detail="Username/Password is wrong")

@@ -2,13 +2,33 @@ services:
   db:
     image: postgres
     environment:
-      POSTGRES_PASSWORD: root
+      POSTGRES_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
       - ./data:/var/lib/postgresql/data
+
+  
+  web:
+    build: .
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DB=: ${DB_DB}
+      DB_TYPE: postgresql+psycopg2
+      SECRET: ${SECRET}
+
     ports:
-      - 5432:5432
+      - 8000:8000
+    
+    depends_on:
+      - db
+
  
   adminer:
     image: adminer
     ports:
       - 8080:8080
+
+    depends_on:
+      - db

@@ -8,8 +8,10 @@ templates = os.path.join('nginx', 'templates')
 env = Environment(loader=FileSystemLoader(templates))
 
 if os.path.exists(html) and os.path.isdir(html):
-    shutil.rmtree(html)
-os.mkdir(html)
+    for file in os.listdir(html):
+         os.remove(os.path.join(html, file))
+else:
+    os.mkdir(html)
 
 for file in os.listdir(templates):
     o, ext = os.path.splitext(file)

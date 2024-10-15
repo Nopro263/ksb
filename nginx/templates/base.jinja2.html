@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindersachenbörse</title>
+
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header>
+        <img src="ballons.jpeg" />
+    </header>
+    <nav>
+        <a class="nav-component" href="/" style="--data-color: blue">Home</a>
+        <a class="nav-component" href="/users" style="--data-color: green">Lieferanten</a>
+        <a class="nav-component" href="/sell" style="--data-color: yellow">Verkaufen</a>
+        <a class="nav-component" href="/import" style="--data-color: orange">Import</a>
+        <a class="nav-component" href="/tools" style="--data-color: red">Tools</a>
+
+        <a class="nav-component right" href="/login" style="--data-color: red">Login</a>
+    </nav>
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+    <footer>2024</footer>
+</body>
+</html>

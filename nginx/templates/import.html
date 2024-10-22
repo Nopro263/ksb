@@ -1,3 +1,12 @@
 {% extends "base.jinja2.html" %}
 
-{% block main %}{% endblock %}
+{% block head %}
+<script type="module" src="import.js"></script>
+{% endblock %}
+
+{% block main %}
+<form>
+    <input type="text" id="barcode" />
+    <input type="submit" value="Import" id="submit"/>
+</form>
+{% endblock %}

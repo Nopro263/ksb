@@ -40,6 +40,10 @@ def token(db: DB, form_data: Annotated[fastapi.security.OAuth2PasswordRequestFor
 
     return {"access_token": encode(Clearance(user.clearance), user.id), "token_type": "bearer"}
 
+@app.get("/token")
+def test_token(auth: Auth[Clearance.OTHER]) -> None:
+    pass
+
 @app.post("/register", responses={
     409: Error(description="Nickname already exists")
 })
@@ -84,7 +88,10 @@ def get_invoice(db: DB, invoice_id: int, auth: Auth[Clearance.EMPLOYEE]) -> Sequ
 @app.post("/import")
 def import_article(db: DB, article_id: ArticleId, auth: Auth[Clearance.EMPLOYEE]) -> ImportResponse:
     expr = select(Article).where(Article.id == article_id.articleId)
-    result = db.exec(expr).one()
+    try:
+        result = db.exec(expr).one()
+    except Exception:
+        raise HTTPException(status_code=404, detail="No article found")
 
     if result.imported:
         return ImportResponse(**result.model_dump(), has_already_been_imported=True)

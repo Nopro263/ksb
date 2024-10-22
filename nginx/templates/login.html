@@ -1,5 +1,14 @@
 {% extends "base.jinja2.html" %}
 
+{% block head %}
+<link rel="stylesheet" href="login.css">
+<script type="module" src="login.js"></script>
+{% endblock %}
+
 {% block main %}
-<h1>Hallo</h1>
+<form>
+    <input type="text" id="username" />
+    <input type="password" id="password" />
+    <input type="submit" value="Login" id="submit"/>
+</form>
 {% endblock %}

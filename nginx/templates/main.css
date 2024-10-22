@@ -64,6 +64,10 @@ nav > .nav-component:hover::after {
     transform: scaleX(1);
 }
 
+main {
+    margin: 5em;
+}
+
 footer {
     position: fixed;
     bottom: 0;

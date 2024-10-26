@@ -10,7 +10,7 @@ from schema.models import ArticleId, ImportResponse
 
 from sqlmodel import select, insert, or_
 from typing import Annotated, Sequence
-from utils import Error, Auth, Clearance, encode
+from utils import Error, Auth, Clearance, encode, Templated
 import hashlib
 import time
 
@@ -103,3 +103,8 @@ def import_article(db: DB, article_id: ArticleId, auth: Auth[Clearance.EMPLOYEE]
     db.refresh(result)
 
     return ImportResponse(**result.model_dump(), has_already_been_imported=False)
+
+@app.get("/test")
+@Templated(template_name="test.html")
+def test(db: DB) -> str:
+    return "abc"

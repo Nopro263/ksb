@@ -1,6 +1,7 @@
 from typing import Annotated, Tuple
 
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException, Request
+import inspect
 
 from enum import IntEnum
 import jwt
@@ -76,3 +77,39 @@ class Auth:
             return ClearedUser(clearance=cl, userId=userid)
 
         return Annotated[ClearedUser, Depends(f)]
+
+def wraps(func):
+    def _wraps(replacement):
+
+        sfunc = inspect.signature(func)
+        srepl = inspect.signature(replacement)
+
+        def f(*args, **kwargs):
+            return replacement(*args, **kwargs)
+
+        sreplp = [p for n,p in srepl.parameters.items() if p.kind != inspect.Parameter.VAR_KEYWORD and p.kind != inspect.Parameter.VAR_POSITIONAL]
+        
+        smerged = inspect.Signature(
+            parameters=[*sfunc.parameters.values(), *sreplp],
+            return_annotation=sfunc.return_annotation
+        )
+    
+        f.__signature__ = smerged
+        f.__name__ = func.__name__
+
+        return f
+    
+    return _wraps
+
+class Templated:
+    def __init__(self, template_name) -> None:
+        self.template_name = template_name
+
+    def __call__(self, func):
+        @wraps(func)
+        def f(*args, request: Request, **kwargs):
+            accept = request.headers.get('accept')
+            ret_val = func(*args, **kwargs)
+            return ret_val
+        
+        return f

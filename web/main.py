@@ -17,12 +17,14 @@ import time
 
 from datetime import datetime
 
-app = FastAPI()
+app = Templated.app = FastAPI()
 
 def hash(d: str) -> str:
     d = d.encode("utf-8")
     return hashlib.sha512(d).hexdigest()
 
+
+Templated.static("/invoice")
 
 
 @app.post("/token")
@@ -103,8 +105,3 @@ def import_article(db: DB, article_id: ArticleId, auth: Auth[Clearance.EMPLOYEE]
     db.refresh(result)
 
     return ImportResponse(**result.model_dump(), has_already_been_imported=False)
-
-@app.get("/test")
-@Templated(template_name="test.html")
-def test(db: DB) -> str:
-    return "abc"

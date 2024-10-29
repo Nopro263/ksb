@@ -5,6 +5,8 @@ services:
       POSTGRES_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
       - ./data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
 
   
   web:

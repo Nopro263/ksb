@@ -1,4 +1,4 @@
-import config
+from . import config
 from sqlmodel import create_engine, Session
 
 from typing import Annotated, Any

@@ -9,6 +9,7 @@ from .schema.user import User
 from . import config
 import fastapi.security
 import datetime
+import hashlib
 
 from pydantic import BaseModel
 
@@ -47,8 +48,12 @@ def decode(s: str) -> Tuple[Clearance, int]:
     
     return (Clearance(data["clearance"]), data["userid"])
 
+def hash(d: str) -> str:
+    d = d.encode("utf-8")
+    return hashlib.sha512(d).hexdigest()
 
-class Auth:
+
+class Auth(ClearedUser):
     def __class_getitem__(cls, clearance):
         def f(token: Annotated[str, fastapi.Depends(flow)]):
             try:

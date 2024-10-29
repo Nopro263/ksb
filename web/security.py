@@ -4,15 +4,15 @@ from fastapi import Depends, HTTPException
 from enum import IntEnum
 import jwt
 from sqlmodel import Session, select
-from schema.user import User
+from .schema.user import User
 
-import config
+from . import config
 import fastapi.security
 import datetime
 
 from pydantic import BaseModel
 
-flow = fastapi.security.OAuth2PasswordBearer(tokenUrl="token", scheme_name="bearer")
+flow = fastapi.security.OAuth2PasswordBearer(tokenUrl="user/login", scheme_name="bearer")
 
 class Clearance(IntEnum):
     ADMIN = 99,
@@ -62,3 +62,5 @@ class Auth:
             return ClearedUser(clearance=cl, userId=userid)
 
         return Annotated[ClearedUser, Depends(f)]
+
+FormData = Annotated[fastapi.security.OAuth2PasswordRequestForm, Depends()]

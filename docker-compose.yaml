@@ -18,6 +18,9 @@ services:
       DB_TYPE: postgresql+psycopg2
       SECRET: ${SECRET}
     
+    volumes:
+      - ./web:/app:ro
+    
     depends_on:
       - db
     

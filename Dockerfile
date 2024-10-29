@@ -13,4 +13,4 @@ RUN pip install -r requirements.txt
 COPY ./web .
 
 
-ENTRYPOINT [ "fastapi", "run", "main.py", "--root-path", "/api" ]
+ENTRYPOINT [ "fastapi", "dev", "main.py",  "--host", "0.0.0.0", "--root-path", "/api" ]

@@ -65,5 +65,5 @@ async def getData(db: DB, auth: Auth[Clearance.OTHER]) -> PrivateUser:
 @router.post("/me")
 async def setData(db: DB, auth: Auth[Clearance.OTHER], user: Annotated[_PrivateUser, Body()]):
     old_user = auth.get_user(db)
-    old_user.set_from(user)
+    old_user.set_from(_PrivateUser, user)
     db.commit()

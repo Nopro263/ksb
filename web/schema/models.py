@@ -1,4 +1,14 @@
+import inspect
+from typing import Any
+
 from pydantic import BaseModel
+
+class _Base(BaseModel):
+    def set_from(self, cls, data: Any):
+        model_fields = { name:value for name, value in inspect.getmembers(cls, lambda a:not(inspect.isroutine(a))) if not name.startswith("_")}["model_fields"]
+
+        for name, field in model_fields.items():
+            setattr(self, name, getattr(data, name))
 
 from .article import Article
 

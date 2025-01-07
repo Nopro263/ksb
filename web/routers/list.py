@@ -1,7 +1,11 @@
+import datetime
+
 from fastapi import APIRouter, Body
 from typing import Annotated
 
 from ..database import DB
+from ..schema.article import CreateArticle, Article
+from ..schema.invoice import Invoice
 from ..schema.list import List
 from ..security import Auth, Clearance
 
@@ -16,9 +20,14 @@ async def createList(db: DB, auth: Auth[Clearance.OTHER]) -> List:
 
     return l
 
-@router.post("/{listId}")
-async def createArticle():
-    pass
+@router.post("/{listId:int}")
+async def createArticle(db: DB, listId: int, auth: Auth[Clearance.OTHER], article: CreateArticle) -> Article:
+    a = Article(**article.model_dump(), imported=False, list_id=listId)
+    db.add(a)
+    db.commit()
+    db.refresh(a)
+
+    return a
 
 @router.delete("/{listId}/{articleId}")
 async def deleteArticle():

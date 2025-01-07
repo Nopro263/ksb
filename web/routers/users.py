@@ -40,17 +40,30 @@ async def register(db: DB, user: Annotated[CreatingUser, Body()]) -> PrivateUser
     db.add(_user)
     db.commit()
     db.refresh(_user)
+    db.commit()
 
     return _user
 
 @router.post("/login")
-async def login(user: FormData) -> LoginResponse:
-    return LoginResponse(access_token=encode(Clearance.OTHER, 39))
+async def login(db: DB, user: FormData) -> LoginResponse:
+    user = db.exec(select(User).where(
+        or_(User.email == user.username, 
+            User.nickname == user.username)
+        ).where(
+            User.password == hash(user.password)
+        )).first()
+
+    if not user:
+        raise HTTPException(status_code=403, detail="Username/Password is wrong")
+
+    return LoginResponse(access_token=encode(Clearance(user.clearance), user.id))
 
 @router.get("/me")
 async def getData(db: DB, auth: Auth[Clearance.OTHER]) -> PrivateUser:
     return auth.get_user(db)
 
 @router.post("/me")
-async def setData(auth: Auth[Clearance.OTHER], user: Annotated[_PrivateUser, Body()]):
-    pass
+async def setData(db: DB, auth: Auth[Clearance.OTHER], user: Annotated[_PrivateUser, Body()]):
+    old_user = auth.get_user(db)
+    old_user.set_from(user)
+    db.commit()

@@ -59,11 +59,11 @@ async def login(db: DB, user: FormData) -> LoginResponse:
     return LoginResponse(access_token=encode(Clearance(user.clearance), user.id))
 
 @router.get("/me")
-async def getData(db: DB, auth: Auth[Clearance.OTHER]) -> PrivateUser:
+async def getData(db: DB, auth: Auth[Clearance.REGISTERED]) -> PrivateUser:
     return auth.get_user(db)
 
 @router.post("/me")
-async def setData(db: DB, auth: Auth[Clearance.OTHER], user: Annotated[_PrivateUser, Body()]):
+async def setData(db: DB, auth: Auth[Clearance.REGISTERED], user: Annotated[_PrivateUser, Body()]):
     old_user = auth.get_user(db)
     old_user.set_from(_PrivateUser, user)
     db.commit()

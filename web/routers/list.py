@@ -14,7 +14,7 @@ from ..security import Auth, Clearance
 router = APIRouter(prefix="/list")
 
 @router.put("/")
-async def createList(db: DB, auth: Auth[Clearance.OTHER]) -> List:
+async def createList(db: DB, auth: Auth[Clearance.REGISTERED]) -> List:
     l = List(owner_id=auth.userId)
     db.add(l)
     db.commit()
@@ -23,7 +23,7 @@ async def createList(db: DB, auth: Auth[Clearance.OTHER]) -> List:
     return l
 
 @router.post("/{listId:int}")
-async def createArticle(db: DB, listId: int, auth: Auth[Clearance.OTHER], article: CreateArticle) -> Article:
+async def createArticle(db: DB, listId: int, auth: Auth[Clearance.REGISTERED], article: CreateArticle) -> Article:
     list = db.exec(select(List).where(List.id == listId)).one()
     if list.owner_id != auth.userId:
         raise HTTPException(status_code=403, detail="not your list")
@@ -35,7 +35,7 @@ async def createArticle(db: DB, listId: int, auth: Auth[Clearance.OTHER], articl
     return a
 
 @router.delete("/{listId}/{articleId}")
-async def deleteArticle(db: DB, listId: int, articleId: int, auth: Auth[Clearance.OTHER]) -> str:
+async def deleteArticle(db: DB, listId: int, articleId: int, auth: Auth[Clearance.REGISTERED]) -> str:
     list = db.exec(select(List).where(List.id == listId)).one()
     if list.owner_id != auth.userId:
         raise HTTPException(status_code=403, detail="not your list")

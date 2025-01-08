@@ -9,6 +9,7 @@ from ..database import DB
 from ..schema.article import CreateArticle, Article
 from ..schema.invoice import Invoice
 from ..schema.list import List
+from ..schema.models import ListResponse
 from ..security import Auth, Clearance
 
 router = APIRouter(prefix="/list")
@@ -33,6 +34,16 @@ async def createArticle(db: DB, listId: int, auth: Auth[Clearance.REGISTERED], a
     db.refresh(a)
 
     return a
+
+@router.get("/{listId:int}")
+async def getList(db: DB, listId: int, auth: Auth[Clearance.REGISTERED]) -> ListResponse:
+    list = db.exec(select(List).where(List.id == listId)).one()
+    if list.owner_id != auth.userId:
+        raise HTTPException(status_code=403, detail="not your list")
+
+    articles = db.exec(select(Article).where(Article.list_id == listId))
+
+    return ListResponse(**list.model_dump(), articles=articles)
 
 @router.delete("/{listId}/{articleId}")
 async def deleteArticle(db: DB, listId: int, articleId: int, auth: Auth[Clearance.REGISTERED]) -> str:

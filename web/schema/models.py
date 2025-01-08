@@ -1,5 +1,5 @@
 import inspect
-from typing import Any
+from typing import Any, List as L
 
 from pydantic import BaseModel
 
@@ -21,3 +21,8 @@ class ImportResponse(Article):
 class LoginResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+from .list import _List
+
+class ListResponse(_List):
+    articles: L[Article]

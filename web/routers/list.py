@@ -1,7 +1,9 @@
 import datetime
 
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, HTTPException
 from typing import Annotated
+
+from sqlmodel import select
 
 from ..database import DB
 from ..schema.article import CreateArticle, Article
@@ -22,6 +24,9 @@ async def createList(db: DB, auth: Auth[Clearance.OTHER]) -> List:
 
 @router.post("/{listId:int}")
 async def createArticle(db: DB, listId: int, auth: Auth[Clearance.OTHER], article: CreateArticle) -> Article:
+    list = db.exec(select(List).where(List.id == listId)).one()
+    if list.owner_id != auth.userId:
+        raise HTTPException(status_code=403, detail="not your list")
     a = Article(**article.model_dump(), imported=False, list_id=listId)
     db.add(a)
     db.commit()
@@ -30,5 +35,13 @@ async def createArticle(db: DB, listId: int, auth: Auth[Clearance.OTHER], articl
     return a
 
 @router.delete("/{listId}/{articleId}")
-async def deleteArticle():
-    pass
+async def deleteArticle(db: DB, listId: int, articleId: int, auth: Auth[Clearance.OTHER]) -> str:
+    list = db.exec(select(List).where(List.id == listId)).one()
+    if list.owner_id != auth.userId:
+        raise HTTPException(status_code=403, detail="not your list")
+
+    article = db.exec(select(Article).where(Article.id == articleId))
+    article.deleted = True
+    db.commit()
+
+    return "ok"

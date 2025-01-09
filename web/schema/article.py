@@ -17,11 +17,11 @@ class Article(CreateArticle, SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     imported: bool
     deleted: bool
-    barcode: Optional[int] = None
+    barcode: Optional[str] = None
     list_id: int = Field(default=None, foreign_key="list.id")
     invoice_id: Optional[int] = Field(default=None, foreign_key="invoice.id")
 
     def gen_barcode(self):
         year = datetime.datetime.now().year
         count_in_year = int(os.environ["COUNT_IN_YEAR"])
-        self.barcode = int(str(f"{int(year) % 100}{count_in_year % 10}{str(self.id).ljust(6, '0')}"))
+        self.barcode = f"{int(year) % 100}{count_in_year % 10}{str(self.id).rjust(6, '0')}{str(self.list_id).rjust(3, '0')}".ljust(12, "0")

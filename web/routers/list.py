@@ -1,5 +1,6 @@
 import datetime
 
+import barcode
 from fastapi import APIRouter, Body, HTTPException
 from typing import Annotated
 
@@ -28,8 +29,12 @@ async def createArticle(db: DB, listId: int, auth: Auth[Clearance.REGISTERED], a
     list = db.exec(select(List).where(List.id == listId)).one()
     if list.owner_id != auth.userId:
         raise HTTPException(status_code=403, detail="not your list")
-    a = Article(**article.model_dump(), imported=False, list_id=listId)
+    a = Article(**article.model_dump(), imported=False, list_id=listId, deleted=False)
     db.add(a)
+    db.commit()
+    db.refresh(a)
+
+    a.gen_barcode()
     db.commit()
     db.refresh(a)
 

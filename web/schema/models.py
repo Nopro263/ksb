@@ -18,6 +18,9 @@ class ArticleId(BaseModel):
 class ImportResponse(Article):
     has_already_been_imported: bool
 
+class SellResponse(Article):
+    has_already_been_sold: bool
+
 class LoginResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"

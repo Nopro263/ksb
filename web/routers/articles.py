@@ -23,9 +23,8 @@ def gen_barcode(db: DB, id:int):
 @router.post("/{bc:int}/import/")
 def import_article(db: DB, bc:int) -> ImportResponse:
     if len(str(bc)) == 13:
-        bc = bc[:-1]
+        bc = str(bc)[:-1]
     _bc = str(bc).rjust(12, "0")
-    print(_bc)
     article: Article = db.exec(select(Article).where(Article.barcode == _bc)).one()
 
     imported = article.imported

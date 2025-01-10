@@ -1,0 +1,7 @@
+#login-logout.loggedIn > #login {
+    display: none;
+}
+
+#login-logout:not(.loggedIn) > #logout {
+    display: none;
+}

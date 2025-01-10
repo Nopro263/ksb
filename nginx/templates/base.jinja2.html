@@ -6,6 +6,7 @@
     <title>Kindersachenbörse</title>
 
     <link rel="stylesheet" href="main.css">
+    <script type="module" src="main.js" defer></script>
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -19,11 +20,14 @@
         <a class="nav-component" href="/import" style="--data-color: orange">Import</a>
         <a class="nav-component" href="/tools" style="--data-color: red">Tools</a>
 
-        <a class="nav-component right" href="/login" style="--data-color: red">Login</a>
+        <div class="nav-component right" style="--data-color: red" id="login-logout">
+            <a href="/login" id="login">Login</a>
+            <a href="#" id="logout">Logout</a>
+        </div>
     </nav>
     <main>
         {% block main %}{% endblock %}
     </main>
-    <footer>2024</footer>
+    <footer>2025</footer>
 </body>
 </html>

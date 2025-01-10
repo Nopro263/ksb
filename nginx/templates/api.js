@@ -40,7 +40,7 @@ class Api {
         Api.token = response.access_token;
         localStorage.setItem("token", Api.token);
 
-        this.redirectToTarget();
+        this.redirectToTarget("/");
 
         return response.access_token;
     }
@@ -83,10 +83,21 @@ class Api {
         return await sendAuthJSONCall("/list/" + list + "/" + article, "DELETE", undefined, Api.token);
     }
 
-    static async checkLoggedIn() {
+    static async isLoggedIn() {
         try {
             await sendAuthJSONCall("/user/me", "GET", undefined, Api.token);
+            return true;
         } catch (error) {
+            return false;
+        }
+    }
+
+    static async checkLoggedIn(r=false) {
+        if(await this.isLoggedIn()) {
+            if(r) {
+                this.redirectToTarget("/");
+            }
+        } else if(!r) {
             var targetUrl = new URL(window.location);
 
             targetUrl.pathname = "login";
@@ -98,10 +109,13 @@ class Api {
         }
     }
 
-    static redirectToTarget() {
+    static redirectToTarget(d=undefined) {
         var url = new URL(window.location);
         var redirect = url.searchParams.get("redirect");
         if(!redirect) {
+            if(d) {
+                window.location.pathname = d;
+            }
             return;
         }
 
@@ -112,6 +126,13 @@ class Api {
         }
 
         window.location = targetUrl;
+    }
+
+    static logout() {
+        Api.token = undefined;
+        localStorage.removeItem("token");
+        window.location.pathname = "/";
+        window.location.reload();
     }
 }
 

@@ -1,3 +1,4 @@
 .env
 __pycache__
 nginx/html/*
+nginx/_templates/*

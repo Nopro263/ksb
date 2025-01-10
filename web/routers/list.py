@@ -56,8 +56,9 @@ async def deleteArticle(db: DB, listId: int, articleId: int, auth: Auth[Clearanc
     if list.owner_id != auth.userId:
         raise HTTPException(status_code=403, detail="not your list")
 
-    article = db.exec(select(Article).where(Article.id == articleId))
+    article: Article = db.exec(select(Article).where(Article.id == articleId)).one()
     article.deleted = True
     db.commit()
+    db.refresh(article)
 
     return "ok"

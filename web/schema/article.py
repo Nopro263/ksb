@@ -8,7 +8,7 @@ from .models import _Base
 class CreateArticle(_Base):
     name: str
     size: str
-    price: int
+    price: float
 
 
 class Article(CreateArticle, SQLModel, table=True):

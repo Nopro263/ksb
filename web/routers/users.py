@@ -42,8 +42,6 @@ async def register(db: DB, user: Annotated[CreatingUser, Body()]) -> PrivateUser
     db.add(_user)
     db.commit()
     db.refresh(_user)
-    db.commit()
-
     return _user
 
 @router.post("/login")

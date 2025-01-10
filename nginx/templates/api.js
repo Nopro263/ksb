@@ -23,7 +23,7 @@ const sendApiCall = async (url, method, post_data, content_type, headers) => {
 }
 
 const sendAuthJSONCall = async (url, method, post_data, token) => {
-    return sendApiCall(url, method, JSON.stringify(post_data), "application/json", {
+    return sendApiCall(url, method, post_data ? JSON.stringify(post_data) : post_data, post_data ? "application/json" : undefined, {
         "Authorization": "Bearer " + token
     });
 }
@@ -31,7 +31,7 @@ const sendAuthJSONCall = async (url, method, post_data, token) => {
 class Api {
     token = "";
     static async login(username, password) {
-        let response = await sendApiCall("/token", "POST", new URLSearchParams({
+        let response = await sendApiCall("/user/login", "POST", new URLSearchParams({
             'username': username,
             'password': password,
             'grant_type': 'password'
@@ -45,17 +45,47 @@ class Api {
         return response.access_token;
     }
 
-    static async create_invoice() {
-        return await sendAuthJSONCall("/invoice", "PUT", undefined, Api.token);
+    static async get_available_usernames() {
+        return await sendApiCall("/user/usernames", "GET");
     }
 
-    static async import_article(article_id) {
-        return await sendAuthJSONCall("/import", "POST", {"articleId": article_id}, Api.token);
+    static async register(first_name, last_name, email, nickname, password) {
+        let data = {first_name, last_name, email, nickname, password};
+        return await sendApiCall("/user/register", "PUT", JSON.stringify(data), "application/json");
+    }
+
+    static async get_self() {
+        return await sendAuthJSONCall("/user/me", "GET", undefined, Api.token);
+    }
+
+    static async set_self(first_name, last_name, email) {
+        let data = {first_name, last_name, email};
+        return await sendAuthJSONCall("/user/me", "POST", data, Api.token);
+    }
+
+    // /user/users
+    // /user/{id}/articles
+
+    static async create_list() {
+        return await sendAuthJSONCall("/list", "PUT", undefined, Api.token);
+    }
+
+    static async create_article(list, name, size, price) {
+        let data = {name, size, price};
+        return await sendAuthJSONCall("/list/" + list, "POST", data, Api.token);
+    }
+
+    static async get_list(list) {
+        return await sendAuthJSONCall("/list/" + list, "GET", undefined, Api.token);
+    }
+
+    static async delete_article(list, article) {
+        return await sendAuthJSONCall("/list/" + list + "/" + article, "DELETE", undefined, Api.token);
     }
 
     static async checkLoggedIn() {
         try {
-            await sendAuthJSONCall("/token", "GET", undefined, Api.token);
+            await sendAuthJSONCall("/user/me", "GET", undefined, Api.token);
         } catch (error) {
             var targetUrl = new URL(window.location);
 
@@ -71,6 +101,9 @@ class Api {
     static redirectToTarget() {
         var url = new URL(window.location);
         var redirect = url.searchParams.get("redirect");
+        if(!redirect) {
+            return;
+        }
 
         var targetUrl = new URL(decodeURIComponent(redirect));
 

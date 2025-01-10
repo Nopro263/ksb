@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Body, HTTPException
 from typing import Annotated, List
-from sqlmodel import select, or_
+from sqlmodel import select, or_, and_
 
-from ..schema.user import CreatingUser, PrivateUser, _PrivateUser, User
 from ..schema.models import LoginResponse
+from ..schema.article import Article
+from ..schema.list import List as _List
+from ..schema.user import CreatingUser, PrivateUser, _PrivateUser, User
 from ..security import FormData, Auth, Clearance, encode, hash
 
 from ..database import DB
@@ -67,3 +69,15 @@ async def setData(db: DB, auth: Auth[Clearance.REGISTERED], user: Annotated[_Pri
     old_user = auth.get_user(db)
     old_user.set_from(_PrivateUser, user)
     db.commit()
+
+@router.get("/users")
+async def getUsers(db: DB, auth: Auth[Clearance.EMPLOYEE]) -> List[PrivateUser]:
+    return db.exec(select(User)).all()
+
+@router.get("/{id:int}/articles")
+async def getArticles(db: DB, auth: Auth[Clearance.EMPLOYEE], id:int) -> List[Article]:
+    r = []
+    for article, _ in db.exec(select(Article, _List).where(and_(Article.list_id == _List.id, _List.owner_id == id)).order_by(Article.id)).all():
+        r.append(article)
+
+    return r

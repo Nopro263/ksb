@@ -10,17 +10,10 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    <header>
-        <img src="ballons.jpeg" />
-    </header>
     <nav>
-        <a class="nav-component" href="/" style="--data-color: blue">Home</a>
-        <a class="nav-component" href="/users" style="--data-color: green">Lieferanten</a>
-        <a class="nav-component" href="/sell" style="--data-color: yellow">Verkaufen</a>
-        <a class="nav-component" href="/import" style="--data-color: orange">Import</a>
-        <a class="nav-component" href="/tools" style="--data-color: red">Tools</a>
-
-        <div class="nav-component right" style="--data-color: red" id="login-logout">
+        <a class="nav-component right" href="/">Home</a>
+        <a class="nav-component left" href="/lists">Meine listen</a>
+        <div class="nav-component" id="login-logout">
             <a href="/login" id="login">Login</a>
             <a href="#" id="logout">Logout</a>
         </div>

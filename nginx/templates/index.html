@@ -1,12 +1,10 @@
 {% extends "base.jinja2.html" %}
 
 {% block head %}
-<script>
-    let api;
-    import("./api.js").then(v => {
-        api = v.default;
-    });
+<script type="module">
+    //import Api from "./api.js";
+    //Api.checkLoggedIn(); 
 </script>
 {% endblock %}
 
-{% block main %}{% endblock %}
+{% block main %}Main{% endblock %}

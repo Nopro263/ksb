@@ -12,6 +12,7 @@ const main = async () => {
     for (let index = 0; index < _lists.length; index++) {
         const _list = _lists[index];
         const list = await Api.get_list(_list.id);
+        const articleCount = list.articles.filter(a => !a.deleted).length;
 
         const div = document.createElement("a");
         div.classList.add("list");
@@ -24,12 +25,12 @@ const main = async () => {
 
         const elementCount = document.createElement("p");
         elementCount.classList.add("elementCount");
-        elementCount.innerText = `${list.articles.length}/${Api.getConfig().max_items_per_list}`;
-        if(list.articles.length >= Api.getConfig().max_items_per_list) {
+        elementCount.innerText = `${articleCount}/${Api.getConfig().max_items_per_list}`;
+        if(articleCount >= Api.getConfig().max_items_per_list) {
             div.classList.add("full");
         }
 
-        if(list.articles.length < Api.getConfig().max_items_per_list && list.articles.length > Api.getConfig().max_items_per_list - 10) {
+        if(articleCount < Api.getConfig().max_items_per_list && articleCount > Api.getConfig().max_items_per_list - 10) {
             div.classList.add("nearly-full");
         }
 

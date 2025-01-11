@@ -2,12 +2,19 @@
 
 {% block head %}
 <script type="module" src="login.js"></script>
+<link rel="stylesheet" href="login.css">
 {% endblock %}
 
 {% block main %}
 <form>
-    <input type="text" id="username" />
-    <input type="password" id="password" />
+    <div class="row">
+        <label for="username">Nickname</label>
+        <input type="text" id="username" />
+    </div>
+    <div class="row">
+        <label for="password">Passwort</label>
+        <input type="password" id="password" />
+    </div>
     <input type="submit" value="Login" id="submit"/>
 </form>
 {% endblock %}

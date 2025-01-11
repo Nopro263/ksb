@@ -1,0 +1,33 @@
+html {
+    height: 100vh;
+    width: 100vw;
+}
+
+body {
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 1 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row > label {
+    margin-right: var(--margin-xs);
+}

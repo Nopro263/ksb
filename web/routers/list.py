@@ -2,7 +2,7 @@ import datetime
 
 import barcode
 from fastapi import APIRouter, Body, HTTPException
-from typing import Annotated
+from typing import Annotated, List as _List
 
 from sqlmodel import select
 
@@ -23,6 +23,10 @@ async def createList(db: DB, auth: Auth[Clearance.REGISTERED]) -> List:
     db.refresh(l)
 
     return l
+
+@router.get("/")
+async def getLists(db: DB, auth: Auth[Clearance.REGISTERED]) -> _List[List]:
+    return db.exec(select(List).where(List.owner_id == auth.userId)).all()
 
 @router.post("/{listId:int}")
 async def createArticle(db: DB, listId: int, auth: Auth[Clearance.REGISTERED], article: CreateArticle) -> Article:

@@ -28,6 +28,13 @@ const sendAuthJSONCall = async (url, method, post_data, token) => {
     });
 }
 
+class Config {
+    constructor() {
+        this.max_items_per_list = 60;
+        this.max_lists_per_user = 3;
+    }
+}
+
 class Api {
     token = "";
     static async login(username, password) {
@@ -43,6 +50,10 @@ class Api {
         this.redirectToTarget("/");
 
         return response.access_token;
+    }
+
+    static getConfig() {
+        return new Config();
     }
 
     static async get_available_usernames() {
@@ -77,6 +88,10 @@ class Api {
 
     static async get_list(list) {
         return await sendAuthJSONCall("/list/" + list, "GET", undefined, Api.token);
+    }
+
+    static async get_lists() {
+        return await sendAuthJSONCall("/list", "GET", undefined, Api.token);
     }
 
     static async delete_article(list, article) {

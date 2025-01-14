@@ -18,7 +18,7 @@ const main = async () => {
     let i = 1;
 
     for (const article of list.articles) {
-        articles.innerHTML += `<tr id="A${article.id}" class="article"><td>${i}</td><td>${article.name}</td><td>${article.size}</td><td>${article.price}€</td><td><button>X</button></td></tr>`;
+        articles.innerHTML += `<tr id="A${article.id}" class="article"><td>${i}</td><td>${article.name}</td><td>${article.size}</td><td>${article.price}€</td><td>${article.deleted ? "" : "<button>X</button>"}</td></tr>`;
         
         if(article.deleted) {
             articles.querySelector(`#A${article.id}`).classList.add("deleted");
@@ -29,7 +29,11 @@ const main = async () => {
 
 
     for (const article of list.articles) {
-        document.querySelector(`.articles > tbody > #A${article.id} > td > button`).addEventListener("click", async (ev) => {
+        const b = document.querySelector(`.articles > tbody > #A${article.id} > td > button`);
+        if(!b) {
+            continue;
+        }
+        b.addEventListener("click", async (ev) => {
             await Api.delete_article(id, article.id);
             main();
         });

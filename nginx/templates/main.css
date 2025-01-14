@@ -48,10 +48,10 @@
     --br-sharp: var(--margin-xxs);
 }
 
-* {
+/* {
     color: var(--black);
     background-color: var(--white);
-}
+}*/
 
 body {
     font: var(--pui);

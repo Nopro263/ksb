@@ -3,6 +3,23 @@
     background-color: red;
 }
 
+table {
+    border-collapse: collapse;
+}
+
+thead > tr,
+tbody > tr {
+    border-bottom: var(--border);
+}
+
+tbody > tr:last-of-type {
+    border-bottom: unset;
+}
+
+thead > tr {
+    border-bottom-color: var(--grey);
+}
+
 .row {
     display: flex;
     justify-content: space-between;
@@ -35,4 +52,17 @@ form input[type=submit] {
 form input[type=submit]:hover {
     background-color: var(--light-grey);
     border-color: var(--grey);
+}
+
+td:has(button) {
+    display: flex;
+    justify-content: center;
+}
+
+td {
+    padding-right: var(--margin-s);
+}
+
+td:first-child {
+    padding-left: var(--margin-s);
 }

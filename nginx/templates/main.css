@@ -31,6 +31,18 @@
     --smallui: .75rem/1.8em var(--ff);
 
     --bold-button: bold .8rem/1.6em var(--ff);
+
+    --_white: white;
+    --_black: black;
+    --_light-grey: lightgrey;
+
+    --white: var(--_light-grey);
+    --black: var(--_black);
+    --light-grey: var(--_light-grey);
+
+    --border: 2px solid var(--light-grey);
+    --br: var(--margin-xs);
+    --br-sharp: var(--margin-xxs);
 }
 
 body {

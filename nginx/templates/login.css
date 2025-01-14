@@ -20,12 +20,26 @@ main {
 }
 
 form {
-    
+    border: var(--border);
+    border-radius: var(--br);
+    padding: var(--margin-l);
+}
+
+form  input {
+    border: var(--border);
+    border-radius: var(--br-sharp);
+}
+
+form  input[type=submit] {
+    padding: var(--margin-xs);
+    border-radius: var(--br);
+    width: 100%;
 }
 
 .row {
     display: flex;
     justify-content: space-between;
+    margin-bottom: var(--margin-s);
 }
 
 .row > label {

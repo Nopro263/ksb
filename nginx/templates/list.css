@@ -1,3 +1,38 @@
-.deleted {
+.deleted,
+.deleted > * {
     background-color: red;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--margin-s);
+}
+
+.row > label {
+    margin-right: var(--margin-xs);
+}
+
+form {
+    border: var(--border);
+    border-radius: var(--br);
+    padding: var(--margin-l);
+    width: fit-content;
+}
+
+form input {
+    border: var(--border);
+    border-radius: var(--br-sharp);
+}
+
+form input[type=submit] {
+    padding: var(--margin-xs);
+    border-radius: var(--br);
+    width: 100%;
+    transition: background-color 250ms, border-color 250ms;
+}
+
+form input[type=submit]:hover {
+    background-color: var(--light-grey);
+    border-color: var(--grey);
 }

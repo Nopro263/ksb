@@ -2,6 +2,7 @@
     /* SPACING */
     font-size: 20px;
 
+    --margin-xxxs: .125rem;
     --margin-xxs: .25rem;
     --margin-xs: .5rem;
     --margin-s: .75rem;
@@ -35,14 +36,21 @@
     --_white: white;
     --_black: black;
     --_light-grey: lightgrey;
+    --_grey: grey;
 
-    --white: var(--_light-grey);
+    --white: var(--_white);
     --black: var(--_black);
     --light-grey: var(--_light-grey);
+    --grey: var(--_grey);
 
     --border: 2px solid var(--light-grey);
     --br: var(--margin-xs);
     --br-sharp: var(--margin-xxs);
+}
+
+* {
+    color: var(--black);
+    background-color: var(--white);
 }
 
 body {

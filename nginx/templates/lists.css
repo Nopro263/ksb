@@ -1,13 +1,37 @@
 .listcontainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .list {
     display: flex;
     flex-direction: row;
+    border: var(--border);
+    padding: var(--margin-xxxs);
+    border-radius: var(--br);
+    width: calc(50% - 16px);
+    margin-bottom: var(--margin-s);
+    justify-content: space-between;
+    text-decoration: none;
+    color: var(--black);
+    transition: background-color 250ms;
+}
+
+.list > * {
+    color: var(--black);
+    transition: background-color 250ms;
+}
+
+.list:hover,
+.list:hover > * {
+    background-color: var(--light-grey);
 }
 
 .id {
-    margin-right: var(--margin-xs);
+    margin-left: var(--margin-s);
+}
+
+.list > *:last-child {
+    margin-right: var(--margin-s);
 }

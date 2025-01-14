@@ -7,6 +7,7 @@ await Api.checkLoggedIn();
 
 const main = async () => {
     const _lists = await Api.get_lists();
+    const self = await Api.get_self();
     listcontainer.innerHTML = "";
 
     for (let index = 0; index < _lists.length; index++) {
@@ -22,6 +23,10 @@ const main = async () => {
         id.innerText = `#${index + 1}`;
 
         div.appendChild(id);
+
+        const name = document.createElement("p");
+        name.innerText = `${self.nickname}${index + 1}`;
+        div.appendChild(name);
 
         const elementCount = document.createElement("p");
         elementCount.classList.add("elementCount");

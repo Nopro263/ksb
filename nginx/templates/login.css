@@ -25,15 +25,21 @@ form {
     padding: var(--margin-l);
 }
 
-form  input {
+form input {
     border: var(--border);
     border-radius: var(--br-sharp);
 }
 
-form  input[type=submit] {
+form input[type=submit] {
     padding: var(--margin-xs);
     border-radius: var(--br);
     width: 100%;
+    transition: background-color 250ms, border-color 250ms;
+}
+
+form input[type=submit]:hover {
+    background-color: var(--light-grey);
+    border-color: var(--grey);
 }
 
 .row {

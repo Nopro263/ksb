@@ -50,7 +50,7 @@ async def getList(db: DB, listId: int, auth: Auth[Clearance.REGISTERED]) -> List
     if list.owner_id != auth.userId:
         raise HTTPException(status_code=403, detail="not your list")
 
-    articles = db.exec(select(Article).where(Article.list_id == listId))
+    articles = db.exec(select(Article).where(Article.list_id == listId).order_by(Article.id))
 
     return ListResponse(**list.model_dump(), articles=articles)
 

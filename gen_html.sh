@@ -1,3 +1,2 @@
 #!/bin/sh
-
-python3 ./gen_html.py watch
+python3 ./gen_html.py $1

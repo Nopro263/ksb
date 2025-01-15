@@ -18,13 +18,7 @@
     transition: background-color 250ms;
 }
 
-.list > * {
-    color: var(--black);
-    transition: background-color 250ms;
-}
-
-.list:hover,
-.list:hover > * {
+.list:hover {
     background-color: var(--light-grey);
 }
 

@@ -7,6 +7,8 @@ const name = document.getElementById("name");
 const size = document.getElementById("size");
 const price = document.getElementById("price");
 
+const next_num = document.querySelector("#next-num");
+
 const args = new URLSearchParams(window.location.search);
 const id = args.get("id");
 
@@ -26,6 +28,8 @@ const main = async () => {
         
         i++;
     };
+
+    next_num.innerHTML = i;
 
 
     for (const article of list.articles) {

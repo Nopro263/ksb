@@ -20,6 +20,10 @@ thead > tr {
     border-bottom-color: var(--grey);
 }
 
+thead td {
+    padding-right: var(--margin-l);
+}
+
 .row {
     display: flex;
     justify-content: space-between;
@@ -30,26 +34,22 @@ thead > tr {
     margin-right: var(--margin-xs);
 }
 
-form {
-    border: var(--border);
-    border-radius: var(--br);
-    padding: var(--margin-l);
-    width: fit-content;
-}
-
-form input {
+input,
+button {
     border: var(--border);
     border-radius: var(--br-sharp);
+    padding: var(--margin-xxs);
 }
 
-form input[type=submit] {
-    padding: var(--margin-xs);
+input[type=submit],
+button {
     border-radius: var(--br);
     width: 100%;
     transition: background-color 250ms, border-color 250ms;
 }
 
-form input[type=submit]:hover {
+input[type=submit]:hover,
+button:hover {
     background-color: var(--light-grey);
     border-color: var(--grey);
 }

@@ -6,20 +6,26 @@
 {% endblock %}
 
 {% block main %}
-<table class="articles"><thead class="thead"><tr><td>#</td><td>Name</td><td>Größe</td><td>Preis</td><td>Löschen</td></tr></thead><tbody></tbody></table>
-<form>
-    <div class="row">
-        <label for="name">Name</label>
-        <input type="text" id="name" />
-    </div>
-    <div class="row">
-        <label for="size">Größe</label>
-        <input type="text" id="size" />
-    </div>
-    <div class="row">
-        <label for="price">Preis</label>
-        <input type="number" id="price" />
-    </div>
-    <input type="submit" value="Hinzufügen" id="submit"/>
-</form>
+<form id="form"></form>
+<table class="articles">
+    <thead class="thead">
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+            <td>Größe</td>
+            <td>Preis</td>
+            <td>Löschen</td>
+        </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+        <tr>
+            <td id="next-num">?</td>
+            <td><input type="text" id="name" form="form"/></td>
+            <td><input type="text" id="size" form="form"/></td>
+            <td><input type="number" id="price" form="form"/></td>
+            <td><input type="submit" value="Hinzufügen" id="submit" form="form"/></td>
+        </tr>
+    </tfoot>
+</table>
 {% endblock %}

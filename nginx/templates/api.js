@@ -28,13 +28,6 @@ const sendAuthJSONCall = async (url, method, post_data, token) => {
     });
 }
 
-class Config {
-    constructor() {
-        this.max_items_per_list = 60;
-        this.max_lists_per_user = 3;
-    }
-}
-
 class Api {
     token = "";
     static async login(username, password) {
@@ -53,7 +46,7 @@ class Api {
     }
 
     static getConfig() {
-        return new Config();
+        return this.config;
     }
 
     static async get_available_usernames() {
@@ -101,6 +94,8 @@ class Api {
     static async isLoggedIn() {
         try {
             await sendAuthJSONCall("/user/me", "GET", undefined, Api.token);
+            let d = await sendAuthJSONCall("/user/config", "GET", undefined, Api.token);
+            this.config = d;
             return true;
         } catch (error) {
             return false;

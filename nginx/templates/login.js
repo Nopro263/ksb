@@ -10,6 +10,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     e.preventDefault();
     e.stopImmediatePropagation();
     try {
+        document.querySelector("form").classList.remove("wrong");
         await Api.login(username.value, password.value);
     } catch({response, json}) {
         if(response.status == 403) {

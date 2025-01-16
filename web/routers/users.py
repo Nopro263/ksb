@@ -5,7 +5,7 @@ from sqlmodel import select, or_, and_
 from ..schema.models import LoginResponse
 from ..schema.article import Article
 from ..schema.list import List as _List
-from ..schema.user import CreatingUser, PrivateUser, _PrivateUser, User
+from ..schema.user import CreatingUser, PrivateUser, _PrivateUser, User, Config, get_config_for_user
 from ..security import FormData, Auth, Clearance, encode, hash
 
 from ..database import DB
@@ -61,6 +61,10 @@ async def login(db: DB, user: FormData) -> LoginResponse:
 @router.get("/me")
 async def getData(db: DB, auth: Auth[Clearance.REGISTERED]) -> PrivateUser:
     return auth.get_user(db)
+
+@router.get("/config")
+async def getConfig(auth: Auth[Clearance.REGISTERED]) -> Config:
+    return get_config_for_user(auth)
 
 @router.post("/me")
 async def setData(db: DB, auth: Auth[Clearance.REGISTERED], user: Annotated[_PrivateUser, Body()]):

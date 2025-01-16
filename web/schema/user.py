@@ -33,3 +33,17 @@ class User(PrivateUser, _Password, SQLModel, table=True):
     __tablename__ = "users"
 
     clearance: int = Field(default=10)
+
+from ..security import Clearance, ClearedUser
+
+class Config(BaseModel):
+    max_lists: int
+    max_items_per_list: int
+    is_employee: bool
+
+def get_config_for_user(user: ClearedUser) -> Config:
+    return Config(
+        max_lists=3,
+        max_items_per_list=60,
+        is_employee=user.clearance >= Clearance.EMPLOYEE
+    )

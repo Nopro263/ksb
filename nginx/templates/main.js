@@ -7,4 +7,17 @@ document.querySelector("#logout").addEventListener("click", (ev) => {
 
 if(await Api.isLoggedIn()) {
     login.classList.add("loggedIn");
+    const config = Api.getConfig();
+    if(config.is_employee) {
+        document.querySelector("nav").innerHTML = `<a class="nav-component right" href="/">Home</a>
+        <a class="nav-component" href="/lists">Meine listen</a>
+        <a class="nav-component" href="/sellers">Verkäufer</a>
+        <a class="nav-component" href="/sell">Verkaufen</a>
+        <a class="nav-component left" href="/import">Importieren</a>
+
+        <div class="nav-component" id="login-logout">
+            <a href="/login" id="login">Login</a>
+            <a href="#" id="logout">Logout</a>
+        </div>`
+    }
 }

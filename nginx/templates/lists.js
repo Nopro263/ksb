@@ -46,9 +46,9 @@ const main = async () => {
         listcontainer.appendChild(div);
     }
 
-    create.innerHTML = `Liste erstellen (${_lists.length}/${Api.getConfig().max_lists_per_user})`;
+    create.innerHTML = `Liste erstellen (${_lists.length}/${Api.getConfig().max_lists})`;
 
-    if(_lists.length >= Api.getConfig().max_lists_per_user) {
+    if(_lists.length >= Api.getConfig().max_lists) {
         create.classList.add("full");
         create.disabled = true;
     }

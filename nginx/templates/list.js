@@ -19,11 +19,15 @@ const main = async () => {
 
     let i = 1;
 
+    let c = 0;
+
     for (const article of list.articles) {
         articles.innerHTML += `<tr id="A${article.id}" class="article"><td>${i}</td><td>${article.name}</td><td>${article.size}</td><td>${article.price}€</td><td>${article.deleted ? "" : "<button>X</button>"}</td></tr>`;
         
         if(article.deleted) {
             articles.querySelector(`#A${article.id}`).classList.add("deleted");
+        } else {
+            c++;
         }
         
         i++;
@@ -41,6 +45,12 @@ const main = async () => {
             await Api.delete_article(id, article.id);
             main();
         });
+    }
+
+    if(c+1 > Api.getConfig().max_items_per_list) {
+        document.querySelector("input[type=submit]").disabled = true;
+    } else {
+        document.querySelector("input[type=submit]").disabled = false;
     }
 }
 

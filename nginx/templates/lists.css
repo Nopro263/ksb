@@ -1,7 +1,14 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .listcontainer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 .list {
@@ -28,4 +35,13 @@
 
 .list > *:last-child {
     margin-right: var(--margin-s);
+}
+
+button {
+    margin-top: var(--margin-l);
+    border: var(--border);
+    padding: var(--margin-xs);
+    border-radius: var(--br);
+    width: 25%;
+    transition: background-color 250ms, border-color 250ms;
 }

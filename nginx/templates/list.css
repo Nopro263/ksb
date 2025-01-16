@@ -1,6 +1,11 @@
-.deleted,
-.deleted > * {
-    background-color: red;
+.deleted {
+    text-decoration: line-through;
+    opacity: 0.25;
+}
+
+main {
+    display: flex;
+    justify-content: center;
 }
 
 table {

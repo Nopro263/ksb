@@ -42,6 +42,14 @@ form input[type=submit]:hover {
     border-color: var(--grey);
 }
 
+form.wrong input:not([type=submit]) {
+    border-color: red;
+}
+
+#msg {
+    color: red;
+}
+
 .row {
     display: flex;
     justify-content: space-between;

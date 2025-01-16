@@ -14,10 +14,10 @@ const sendApiCall = async (url, method, post_data, content_type, headers) => {
     let json = await response.json();
 
     return new Promise((resolve, reject) => {
-        if(response.ok) {
+        if(response.ok && response.status >= 200 && response.status < 300) {
             resolve(json);
         } else {
-            reject((response, json));
+            reject({response, json});
         }
     });
 }

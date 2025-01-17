@@ -91,6 +91,30 @@ class Api {
         return await sendAuthJSONCall("/list/" + list + "/" + article, "DELETE", undefined, Api.token);
     }
 
+    static async import_article(barcode) {
+        return await sendAuthJSONCall("/article/" + barcode + "/import", "POST", undefined, Api.token);
+    }
+
+    static async create_invoice() {
+        return await sendAuthJSONCall("/invoice/new", "POST", undefined, Api.token);
+    }
+
+    static async sell_article(invoice, barcode) {
+        return await sendAuthJSONCall("/invoice/" + invoice + "/sell/" + barcode, "POST", undefined, Api.token);
+    }
+
+    static async get_invoice(id) {
+        return await sendAuthJSONCall("/invoice/" + id, "GET", undefined, Api.token);
+    }
+
+    static async get_invoice_details(id) {
+        return await sendAuthJSONCall("/invoice/" + id + "/meta", "GET", undefined, Api.token);
+    }
+
+    static async get_invoice_print_link(id) {
+        return await sendAuthJSONCall("/invoice/" + id + "/print", "GET", undefined, Api.token);
+    }
+
     static async isLoggedIn() {
         try {
             await sendAuthJSONCall("/user/me", "GET", undefined, Api.token);

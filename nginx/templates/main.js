@@ -10,7 +10,6 @@ if(await Api.isLoggedIn()) {
     const config = Api.getConfig();
     if(config.is_employee) {
         document.querySelector("nav").innerHTML = `<a class="nav-component right" href="/">Home</a>
-        <a class="nav-component" href="/lists">Meine listen</a>
         <a class="nav-component" href="/sellers">Verkäufer</a>
         <a class="nav-component" href="/sell">Verkaufen</a>
         <a class="nav-component left" href="/import">Importieren</a>

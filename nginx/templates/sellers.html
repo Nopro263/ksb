@@ -1,0 +1,20 @@
+{% extends "base.jinja2.html" %}
+
+{% block head %}
+<script type="module" src="sellers.js" defer></script>
+<link rel="stylesheet" href="sellers.css">
+{% endblock %}
+
+{% block main %}
+<table class="sellers">
+    <thead class="thead">
+        <tr>
+            <td>#</td>
+            <td>Benutzername</td>
+            <td>Name</td>
+            <td>Email</td>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+{% endblock %}

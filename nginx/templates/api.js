@@ -67,8 +67,13 @@ class Api {
         return await sendAuthJSONCall("/user/me", "POST", data, Api.token);
     }
 
-    // /user/users
-    // /user/{id}/articles
+    static async get_users() {
+        return await sendAuthJSONCall("/user/users", "GET", undefined, Api.token);
+    }
+
+    static async get_articles(userId) {
+        return await sendAuthJSONCall("/user/" + userId + "/articles", "GET", undefined, Api.token);
+    }
 
     static async create_list() {
         return await sendAuthJSONCall("/list", "PUT", undefined, Api.token);

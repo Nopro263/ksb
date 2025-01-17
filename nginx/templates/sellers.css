@@ -1,0 +1,33 @@
+main {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+thead > tr,
+tbody > tr {
+    border-bottom: var(--border);
+}
+
+tbody > tr:last-of-type {
+    border-bottom: unset;
+}
+
+thead > tr {
+    border-bottom-color: var(--grey);
+}
+
+thead td {
+    padding-right: var(--margin-l);
+}
+
+td {
+    padding-right: var(--margin-s);
+}
+
+td:first-child {
+    padding-left: var(--margin-s);
+}

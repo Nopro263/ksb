@@ -1,10 +1,11 @@
 import io
 
 from barcode.writer import SVGWriter
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from sqlmodel import select
 import barcode
 from starlette.responses import Response
+from sqlalchemy.exc import NoResultFound
 
 from ..database import DB
 from ..schema.article import Article
@@ -25,8 +26,10 @@ def import_article(db: DB, bc:int) -> ImportResponse:
     if len(str(bc)) == 13:
         bc = str(bc)[:-1]
     _bc = str(bc).rjust(12, "0")
-    article: Article = db.exec(select(Article).where(Article.barcode == _bc)).one()
-
+    try:
+        article: Article = db.exec(select(Article).where(Article.barcode == _bc)).one()
+    except NoResultFound:
+        raise HTTPException(status_code=404, detail="Artikel nicht gefunden")
     imported = article.imported
 
     article.imported = True

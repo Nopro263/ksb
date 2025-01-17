@@ -1,5 +1,7 @@
 import Api from "./api.js";
 
+Api.checkLoggedIn();
+
 const barcode = document.getElementById("barcode");
 const msg = document.getElementById("msg");
 

@@ -1,0 +1,16 @@
+{% extends "base.jinja2.html" %}
+
+{% block head %}
+<script type="module" src="import.js" defer></script>
+<link rel="stylesheet" href="import.css">
+{% endblock %}
+{% block main %}
+<form>
+    <div class="row">
+        <label for="barcode">Barcode</label>
+        <input type="text" id="barcode" autofocus/>
+    </div>
+    <div class="row" id="msg"></div>
+    <input type="submit" value="Importieren" id="submit"/>
+</form>
+{% endblock %}

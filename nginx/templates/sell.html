@@ -1,0 +1,38 @@
+{% extends "base.jinja2.html" %}
+
+{% block head %}
+<script type="module" src="sell.js" defer></script>
+<link rel="stylesheet" href="sell.css">
+{% endblock %}
+
+{% block main %}
+<h1 id="id"></h1>
+<p id="creation_time"></p>
+    
+<table class="invoice">
+    <thead class="thead">
+        <tr>
+            <td>Artikel</td>
+            <td>Größe</td>
+            <td>Preis</td>
+        </tr>
+    </thead>
+    <tbody>
+            
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2" class="bold">Summe</td>
+            <td id="sum">42€</td>
+        </tr>
+    </tfoot>
+</table>
+
+<form>
+    <div class="row" id="msg"></div>
+    <div class="row">
+        <input type="text" id="barcode" autofocus/>
+        <input type="submit" value="Verkaufen" id="submit"/>
+    </div>
+</form>
+{% endblock %}

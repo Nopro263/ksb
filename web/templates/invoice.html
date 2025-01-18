@@ -4,10 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="/main.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        table {
+            border-collapse: collapse;
+        }
+        
+        thead > tr,
+        tbody > tr {
+            border-bottom: var(--border);
+        }
+        
+        tbody > tr:last-of-type {
+            border-bottom-color: var(--grey);
+        }
+        
+        thead > tr {
+            border-bottom-color: var(--grey);
+        }
+        
+        thead td {
+            padding-right: var(--margin-l);
+        }
+        
+        td {
+            padding-right: var(--margin-s);
+        }
+        
+        td:first-child {
+            padding-left: var(--margin-s);
+        }
+    </style>
 </head>
 <body>
-    <h1>Invoice</h1>
-    {{ invoice }}
-    {{ articles }}
+    <h1>Rechnung #{{ invoice.id }}</h1>
+    <p>{{ invoice.creation_time}}</p>
+    
+    <table class="invoice">
+        <thead class="thead">
+            <tr>
+                <td>Artikel</td>
+                <td>Größe</td>
+                <td>Preis</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+                <tr><td>{{ article.name }}</td><td>{{ article.size or "" }}</td><td>{{ article.price }}€</td></tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2" class="bold">Summe</td>
+                <td>{{ data.sum }}€</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <p>Betrag dankend empfangen!</p>
 </body>
 </html>

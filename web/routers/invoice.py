@@ -39,11 +39,17 @@ def sell_article(db: DB, auth: Auth[Clearance.EMPLOYEE], id: int, article: int) 
     _bc = str(article).rjust(12, "0")
     a: Article = db.exec(select(Article).where(Article.barcode == _bc)).one()
     invoice_id = a.invoice_id
+
+    sr = SellResponse.model_validate(a, from_attributes=True, update={"has_already_been_sold": isinstance(invoice_id, int)})
+
+    if isinstance(invoice_id, int):
+        return sr
+
     a.invoice_id = id
     db.commit()
     db.refresh(a)
 
-    sr = SellResponse.model_validate(a, from_attributes=True, update={"has_already_been_sold": isinstance(invoice_id, int)})
+    
 
     return sr
 
@@ -70,4 +76,6 @@ def print_invoice(db: DB, id: int, secret: str, request: Request) -> HTMLRespons
     invoice = db.exec(select(Invoice).where(Invoice.id == id)).one()
     articles = db.exec(select(Article).where(Article.invoice_id == id)).all()
 
-    return templates.TemplateResponse("invoice.html", {"invoice": invoice, "articles": articles, "request": request})
+    s = sum([a.price for a in articles])
+
+    return templates.TemplateResponse("invoice.html", {"invoice": invoice, "articles": articles, "request": request, "data": {"sum":s}})

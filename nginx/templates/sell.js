@@ -35,3 +35,8 @@ document.querySelector("form").addEventListener("submit", async (e) => {
         msg.classList.add("error");
     }
 })
+
+document.querySelector("#print").addEventListener("click", async (e) => {
+    const url = await Api.get_invoice_print_link(invoice.id);
+    window.open(url, '_blank').focus();
+})

@@ -18,6 +18,8 @@ document.querySelector("form").addEventListener("submit", async (e) => {
             msg.innerHTML = `Artikel #${article.id} '${article.name}' von #${article.list_id} importiert`;
             msg.classList.remove("error");
         }
+
+        barcode.focus();
     } catch({response, json}) {
         msg.innerHTML = "Error: " + json.detail;
         msg.classList.add("error");

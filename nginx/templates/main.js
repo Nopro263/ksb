@@ -1,12 +1,10 @@
 import Api from "./api.js";
 
-const login = document.querySelector("#login-logout");
 document.querySelector("#logout").addEventListener("click", (ev) => {
     Api.logout();
 })
 
 if(await Api.isLoggedIn()) {
-    login.classList.add("loggedIn");
     const config = Api.getConfig();
     if(config.is_employee) {
         document.querySelector("nav").innerHTML = `<a class="nav-component right" href="/">Home</a>
@@ -19,4 +17,7 @@ if(await Api.isLoggedIn()) {
             <a href="#" id="logout">Logout</a>
         </div>`
     }
+
+    const login = document.querySelector("#login-logout");
+    login.classList.add("loggedIn");
 }

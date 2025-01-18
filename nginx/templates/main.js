@@ -1,9 +1,5 @@
 import Api from "./api.js";
 
-document.querySelector("#logout").addEventListener("click", (ev) => {
-    Api.logout();
-})
-
 if(await Api.isLoggedIn()) {
     const config = Api.getConfig();
     if(config.is_employee) {
@@ -21,3 +17,7 @@ if(await Api.isLoggedIn()) {
     const login = document.querySelector("#login-logout");
     login.classList.add("loggedIn");
 }
+
+document.querySelector("#logout").addEventListener("click", (ev) => {
+    Api.logout();
+})

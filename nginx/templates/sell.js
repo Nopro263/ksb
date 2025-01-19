@@ -8,8 +8,23 @@ const creation_time = document.querySelector("#creation_time");
 const sum = document.querySelector("#sum");
 const msg = document.querySelector("#msg");
 
+const search = new URLSearchParams(window.location.search);
+let invoice;
+if(search.get("id") === null) {
+    invoice = await Api.create_invoice();
+    const url = new URL(window.location);
+    url.searchParams.set("id", invoice.id);
+    window.history.pushState({}, null, url);
+} else {
+    invoice = await Api.get_invoice_details(parseInt(search.get("id")));
 
-const invoice = await Api.create_invoice();
+    const articles = await Api.get_invoice(invoice.id);
+    articles.forEach(article => {
+        document.querySelector("tbody").innerHTML += `<tr><td>${article.name}</td><td>${article.size}</td><td>${article.price}€</td></tr>`;
+        sum.innerHTML = parseInt(sum.innerHTML.substring(0, sum.innerHTML.length-1)) + article.price + "€"
+    });
+}
+
 id.innerHTML = `Rechnung #${invoice.id}`;
 creation_time.innerHTML = invoice.creation_time;
 

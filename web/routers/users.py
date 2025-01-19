@@ -12,7 +12,7 @@ from ..database import DB
 
 router = APIRouter(prefix="/user")
 
-usernames = ["Ananas", "Kiwi", "Apfel", "Mango", "Birne", "Melone", "Banane", "Nopro"]
+usernames = ["Apfel", "Birne", "Vogelbeere", "Marille", "Olive", "Zwetschge", "Pfirsich", "Kirsche", "Brombeere", "Erdbeer", "Weintraube", "Erdnuss", "Ananas", "Avokado", "Banane", "Orange", "Kiwi", "Mandarine", "Dattel", "Kokosnuss", "Ingwer", "Feige", "Melone", "Papaya", "Pistazie"]
 
 def get_usernames(db):
     us = usernames.copy()

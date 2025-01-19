@@ -1,0 +1,41 @@
+import Api from "./api.js";
+
+await Api.checkLoggedIn();
+
+const search = new URLSearchParams(window.location.search);
+
+if(search.get("id") === null) {
+    window.location.pathname = "/sellers";
+    throw new Error("");
+    
+}
+
+const user = await Api.get_user(parseInt(search.get("id")));
+
+const main = document.querySelector("main");
+
+const lists = await Api.get_lists_of_user(user.id);
+
+lists.forEach(list => {
+    main.innerHTML += `<h1>Liste #${list.id}</h1><table class="articles" id="L${list.id}">
+    <thead class="thead">
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+            <td>Größe</td>
+            <td>Preis</td>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>`;
+});
+
+lists.forEach(async list => {
+    const body = document.querySelector(`#L${list.id} > tbody`);
+    const articles = (await Api.get_list_bypass(list.id)).articles;
+    let i = 1;
+    articles.forEach(article => {
+        body.innerHTML += `<tr id="A${article.id}" class="article"><td>${i++}</td><td>${article.name}</td><td>${article.size}</td><td>${article.price}€</td></tr>`;
+    });
+    
+});

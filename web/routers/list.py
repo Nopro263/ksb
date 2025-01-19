@@ -36,6 +36,10 @@ async def createList(db: DB, auth: Auth[Clearance.REGISTERED]) -> List:
 async def getLists(db: DB, auth: Auth[Clearance.REGISTERED]) -> _List[List]:
     return db.exec(select(List).where(List.owner_id == auth.userId)).all()
 
+@router.get("/of/{userId:int}")
+async def getListsOfUser(db: DB, auth: Auth[Clearance.REGISTERED], userId: int) -> _List[List]:
+    return db.exec(select(List).where(List.owner_id == userId)).all()
+
 @router.post("/{listId:int}")
 async def createArticle(db: DB, listId: int, auth: Auth[Clearance.REGISTERED], article: CreateArticle) -> Article:
     list = db.exec(select(List).where(List.id == listId)).one()
@@ -58,6 +62,14 @@ async def createArticle(db: DB, listId: int, auth: Auth[Clearance.REGISTERED], a
     db.refresh(a)
 
     return a
+
+@router.get("/{listId:int}/bypass")
+async def getList(db: DB, listId: int, auth: Auth[Clearance.EMPLOYEE]) -> ListResponse:
+    list = db.exec(select(List).where(List.id == listId)).one()
+
+    articles = db.exec(select(Article).where(Article.list_id == listId).order_by(Article.id))
+
+    return ListResponse(**list.model_dump(), articles=articles)
 
 @router.get("/{listId:int}")
 async def getList(db: DB, listId: int, auth: Auth[Clearance.REGISTERED]) -> ListResponse:

@@ -76,6 +76,10 @@ async def setData(db: DB, auth: Auth[Clearance.REGISTERED], user: Annotated[_Pri
 async def getUsers(db: DB, auth: Auth[Clearance.EMPLOYEE]) -> List[PrivateUser]:
     return db.exec(select(User)).all()
 
+@router.get("/{id:int}")
+async def getUser(db: DB, id: int, auth: Auth[Clearance.EMPLOYEE]) -> PrivateUser:
+    return db.exec(select(User).where(User.id == id)).one()
+
 @router.get("/{id:int}/articles")
 async def getArticles(db: DB, auth: Auth[Clearance.EMPLOYEE], id:int) -> List[Article]:
     r = []

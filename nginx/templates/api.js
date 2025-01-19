@@ -120,6 +120,18 @@ class Api {
         return await sendAuthJSONCall("/invoice/" + id + "/print", "GET", undefined, Api.token);
     }
 
+    static async get_user(id) {
+        return await sendAuthJSONCall("/user/" + id, "GET", undefined, Api.token);
+    }
+
+    static async get_lists_of_user(id) {
+        return await sendAuthJSONCall("/list/of/" + id, "GET", undefined, Api.token);
+    }
+
+    static async get_list_bypass(id) {
+        return await sendAuthJSONCall("/list/" + id + "/bypass", "GET", undefined, Api.token);
+    }
+
     static async isLoggedIn() {
         try {
             await sendAuthJSONCall("/user/me", "GET", undefined, Api.token);

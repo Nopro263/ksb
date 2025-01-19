@@ -163,10 +163,11 @@ class Api {
     static redirectToTarget(d=undefined) {
         var url = new URL(window.location);
         var redirect = url.searchParams.get("redirect");
-        if(!redirect) {
-            if(d) {
+        if(redirect == null) {
+            if(d !== undefined) {
                 window.location.pathname = d;
-                window.location.search = "";
+                //window.location.search = "";
+                throw new Error("");
             }
             return;
         }

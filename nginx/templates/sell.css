@@ -84,3 +84,11 @@ form.wrong input:not([type=submit]) {
 .row > label {
     margin-right: var(--margin-xs);
 }
+
+.bold {
+    font-weight: bold;
+}
+
+#sum {
+    font-weight: bolder;
+}

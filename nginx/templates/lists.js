@@ -4,8 +4,13 @@ const listcontainer = document.querySelector(".listcontainer");
 const create = document.querySelector("#create");
 
 await Api.checkLoggedIn();
-if((await Api.getConfig()).is_employee) {
-    Api.redirectToTarget("/");
+if(!Api.getConfig()) {
+    throw new Error("???");
+    
+}
+if(Api.getConfig().is_employee) {
+    window.location.pathname = "/";
+    throw new Error("");
 }
 
 const main = async () => {

@@ -4,6 +4,9 @@ const listcontainer = document.querySelector(".listcontainer");
 const create = document.querySelector("#create");
 
 await Api.checkLoggedIn();
+if((await Api.getConfig()).is_employee) {
+    Api.redirectToTarget("/");
+}
 
 const main = async () => {
     const _lists = await Api.get_lists();

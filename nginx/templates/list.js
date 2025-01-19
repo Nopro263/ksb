@@ -13,7 +13,13 @@ const args = new URLSearchParams(window.location.search);
 const id = args.get("id");
 
 const main = async () => {
-    const list = await Api.get_list(id);
+    let list;
+    try {
+        list = await Api.get_list(id);
+    } catch({response, json}) {
+        alert(json.detail);
+        Api.redirectToTarget("/");
+    }
 
     articles.innerHTML = "";
 

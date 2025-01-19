@@ -154,6 +154,7 @@ class Api {
         if(!redirect) {
             if(d) {
                 window.location.pathname = d;
+                window.location.search = "";
             }
             return;
         }

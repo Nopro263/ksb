@@ -18,7 +18,9 @@ const main = async () => {
         list = await Api.get_list(id);
     } catch({response, json}) {
         alert(json.detail);
-        Api.redirectToTarget("/");
+        window.location.pathname = "/";
+        window.location.search = "";
+        return;
     }
 
     articles.innerHTML = "";

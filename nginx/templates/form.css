@@ -1,0 +1,16 @@
+form {
+    border: var(--border);
+    border-radius: var(--br);
+
+    padding: var(--margin-l);
+
+    width: fit-content;
+    height: fit-content;
+}
+
+input[type=text],
+input[type=password] {
+    border: var(--border);
+    border-width: 1px;
+    border-radius: var(--br-sharp);
+}

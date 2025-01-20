@@ -46,42 +46,68 @@
     --border: 2px solid var(--light-grey);
     --br: var(--margin-xs);
     --br-sharp: var(--margin-xxs);
-
-    --nav-default-color: black;
-    --nav-active-color: blue;
 }
 
-html:not(:has(.scrolling-body)) {
-    height: 100vh;
-    width: 100vw;
-}
-
-body:not(.scrolling-body) {
-    width: calc(100% - 16px);
-    height: calc(100% - 8px);
-
-    display: flex;
-    flex-direction: column;
-}
-
-body:not(.scrolling-body) > main {
-    display: flex;
-    flex: 1 1 auto;
-    width: 100%;
-
-    justify-content: center;
-}
+/* {
+    color: var(--black);
+    background-color: var(--white);
+}*/
 
 body {
     font: var(--pui);
 }
 
-.row {
-    display: flex;
-    flex-direction: column;
+#login-logout.loggedIn > #login {
+    display: none;
 }
 
-.col {
+#login-logout:not(.loggedIn) > #logout {
+    display: none;
+}
+
+nav {
+    width: 100%;
+    height: fit-content;
+
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+
+    margin-bottom: var(--margin-l);
+}
+nav > .nav-component,
+nav > .nav-component > * {
+    text-decoration: none;
+    color: black;
+
+    margin-left: var(--margin-xs);
+    margin-right: var(--margin-xs);
+    transition: color 250ms;
+}
+
+nav > .nav-component.right {
+    margin-left: auto;
+    margin-right: var(--margin-xs);
+}
+
+nav > .nav-component.left {
+    margin-left: var(--margin-xs);
+    margin-right: auto;
+}
+
+nav > .nav-component:hover,
+nav > .nav-component:hover > * {
+    color: red;
+}
+nav > .nav-component::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: var(--margin-xxs);
+    background-color: red;
+    transition: transform 250ms;
+    transform: scaleX(0);
+}
+
+nav > .nav-component:hover::after {
+    transform: scaleX(1);
 }

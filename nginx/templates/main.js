@@ -21,3 +21,9 @@ if(await Api.isLoggedIn()) {
 document.querySelector("#logout").addEventListener("click", (ev) => {
     Api.logout();
 })
+
+const nav_component = document.querySelector(`a.nav-component[href="${window.location.pathname}"]`);
+
+if(nav_component) {
+    nav_component.classList.add("active");
+}

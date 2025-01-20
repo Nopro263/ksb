@@ -1,0 +1,50 @@
+body {
+    margin: 8px;
+    margin-top: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+
+    border-bottom: var(--border);
+}
+
+nav > .nav-component {
+    padding-top: var(--margin-m);
+    padding-bottom: var(--margin-m);
+    padding-left: var(--margin-xs);
+    padding-right: var(--margin-xs);
+}
+
+nav > .nav-component.active {
+    border-bottom: var(--border);
+    border-bottom-color: var(--nav-active-color);
+}
+
+nav > .nav-component,
+nav > .nav-component > * {
+    color: var(--nav-default-color);
+    text-decoration: none;
+}
+
+nav > .nav-component.active,
+nav > .nav-component.active > * {
+    color: var(--nav-active-color);
+}
+
+nav > .nav-component:first-child {
+    margin-left: auto;
+}
+
+nav > .nav-component:last-child {
+    margin-left: auto;
+}
+
+#login-logout.loggedIn > #login {
+    display: none;
+}
+
+#login-logout:not(.loggedIn) > #logout {
+    display: none;
+}

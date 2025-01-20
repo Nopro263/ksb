@@ -6,13 +6,15 @@
     <title>Kindersachenbörse</title>
 
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="form.css">
     <script type="module" src="main.js" defer></script>
     {% block head %}{% endblock %}
 </head>
 <body>
     <nav>
-        <a class="nav-component right" href="/">Home</a>
-        <a class="nav-component left" href="/lists">Meine listen</a>
+        <a class="nav-component" href="/">Home</a>
+        <a class="nav-component" href="/lists">Meine listen</a>
         <div class="nav-component" id="login-logout">
             <a href="/login" id="login">Login</a>
             <a href="#" id="logout">Logout</a>

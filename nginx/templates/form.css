@@ -10,7 +10,20 @@ form {
 
 input[type=text],
 input[type=password] {
-    border: var(--border);
     border-width: 1px;
     border-radius: var(--br-sharp);
+
+    padding: var(--margin-xs);
+    margin: var(--margin-xxs);
+
+    background-color: var(--input-text-default-background);
+    border: var(--input-text-default-border);
+}
+
+input[type=text]:active, input[type=text]:focus,
+input[type=password]:active, input[type=password]:focus {
+    background-color: var(--input-text-active-background);
+    border: var(--input-text-active-border);
+
+    outline: none;
 }

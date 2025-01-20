@@ -6,15 +6,9 @@
 {% endblock %}
 
 {% block main %}
-<form>
-    <div class="row">
-        <label for="username">Nickname</label>
-        <input type="text" id="username" autofocus/>
-    </div>
-    <div class="row">
-        <label for="password">Passwort</label>
-        <input type="password" id="password" />
-    </div>
+<form class="col">
+    <input type="text" id="username" autofocus placeholder="Nickname"/>
+    <input type="password" id="password" placeholder="Passwort"/>
     <div class="row" id="msg"></div>
     <input type="submit" value="Login" id="submit"/>
     <input type="button" value="Registrieren" id="register" onclick="window.location.pathname = '/register' "/>

@@ -43,12 +43,18 @@
     --light-grey: var(--_light-grey);
     --grey: var(--_grey);
 
-    --border: 2px solid var(--light-grey);
+    --_border: 2px solid;
+    --border: var(--_border) var(--light-grey);
     --br: var(--margin-xs);
     --br-sharp: var(--margin-xxs);
 
     --nav-default-color: black;
     --nav-active-color: blue;
+
+    --input-text-default-background: whitesmoke;
+    --input-text-active-background: whitesmoke;
+    --input-text-default-border: var(--_border) transparent;
+    --input-text-active-border: var(--_border) lightgrey;
 }
 
 html:not(:has(.scrolling-body)) {
@@ -78,10 +84,10 @@ body {
 
 .row {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .col {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }

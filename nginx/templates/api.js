@@ -30,6 +30,7 @@ const sendAuthJSONCall = async (url, method, post_data, token) => {
 
 class Api {
     token = "";
+    _popup_reject = null;
     static async login(username, password) {
         let response = await sendApiCall("/user/login", "POST", new URLSearchParams({
             'username': username,
@@ -186,6 +187,53 @@ class Api {
         localStorage.removeItem("token");
         window.location.pathname = "/";
         window.location.reload();
+    }
+
+    static async show_popup(title, content, options=[], image=undefined) {
+        Api.close_popup();
+
+        const popup = document.querySelector(".popup");
+        const c = popup.querySelector(".content");
+        const h1  = popup.querySelector("h1");
+        const img = popup.querySelector("img");
+        const answers = popup.querySelector(".answers");
+        answers.innerHTML = "";
+
+        h1.innerText = title;
+        c.innerText = content;
+        img.src = image ? image : "https://cdn-icons-png.flaticon.com/512/4201/4201973.png";
+
+        popup.style.display = "flex";
+
+        return new Promise((resolve, reject) => {
+            Api._popup_reject = reject;
+            for (const option of options) {
+                const element = document.createElement("button");
+                if(option.type) {
+                    element.classList.add(option.type);
+                }
+                element.innerText = option.text;
+                element.addEventListener("click", (ev) => {
+                    Api._popup_reject = null;
+                    this.close_popup();
+                    resolve({
+                        "event": ev,
+                        "data": option.data
+                    });
+                });
+    
+                answers.appendChild(element);
+            }
+        });
+    }
+
+    static close_popup() {
+        const popup = document.querySelector(".popup");
+        popup.style.display = "none";
+        if(Api._popup_reject) {
+            Api._popup_reject("closed");
+            Api._popup_reject = null;
+        }
     }
 }
 

@@ -13,6 +13,21 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+    <div class="popup" style="display: none;">
+        <div class="inner">
+            <div class="header">
+                <h1>error</h1>
+                <img src="https://cdn-icons-png.flaticon.com/512/4201/4201973.png"> 
+            </div>
+            <div class="content">
+                Hehe error
+            </div>
+            <div class="answers">
+                <button class="danger">Abbrechen</button>
+                <button class="success">Ok</button>
+            </div>
+        </div>
+    </div>
     <nav>
         <a class="nav-component" href="/">%home%</a>
         <a class="nav-component" href="/lists">%my-lists%</a>

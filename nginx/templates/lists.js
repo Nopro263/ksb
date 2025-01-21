@@ -54,7 +54,7 @@ const main = async () => {
         listcontainer.appendChild(div);
     }
 
-    create.innerHTML = `Liste erstellen (${_lists.length}/${Api.getConfig().max_lists})`;
+    create.innerHTML = `%create-list% (${_lists.length}/${Api.getConfig().max_lists})`;
 
     if(_lists.length >= Api.getConfig().max_lists) {
         create.classList.add("full");
@@ -63,6 +63,27 @@ const main = async () => {
 }
 
 create.addEventListener("click", async (ev) => {
+    const answer = await Api.show_popup(
+        "You sure?",
+        "Creating a new list comes with the cost of 10€",
+        [
+            {
+                type: "information",
+                text: "Yes, create it",
+                data: "yes"
+            },
+            {
+                type: "danger",
+                text: "No, don't do it",
+                data: "no"
+            }
+        ]
+    );
+
+    if(answer.data == "no") {
+        return;
+    }
+
     await Api.create_list();
     await main();
 });

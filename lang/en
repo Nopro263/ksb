@@ -10,3 +10,8 @@ last-name:    last name
 email:    email
 repeat-password:    repeat password
 create-list:    create new list
+are-you-sure:    are you sure?
+information-list-price:    Creating a list comes with the price of 10€
+create-it:    Yes, do it
+dont-do-it:    No, don't do it
+more-information:    More Information

@@ -64,23 +64,32 @@ const main = async () => {
 
 create.addEventListener("click", async (ev) => {
     const answer = await Api.show_popup(
-        "You sure?",
-        "Creating a new list comes with the cost of 10€",
+        "%are-you-sure%",
+        "%information-list-price%",
         [
             {
                 type: "information",
-                text: "Yes, create it",
+                text: "%create-it%",
                 data: "yes"
             },
             {
                 type: "danger",
-                text: "No, don't do it",
+                text: "%dont-do-it%",
                 data: "no"
+            },
+            {
+                type: "",
+                text: "%more-information%",
+                data: "more"
             }
         ]
     );
 
-    if(answer.data == "no") {
+    if(answer.data == "more") {
+        window.open("https://www.kindersachenboer.se/ablauf", "_blank");
+    }
+
+    if(answer.data != "yes") {
         return;
     }
 

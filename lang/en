@@ -1,2 +1,11 @@
 home:    Home
-my-lists:    My Lists
+my-lists:    My lists
+login:    Login
+logout:    Logout
+nickname:    nickname
+password:    password
+register:    Register
+first-name:    first name
+last-name:    last name
+email:    email
+repeat-password:    repeat password

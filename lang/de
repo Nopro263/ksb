@@ -1,2 +1,11 @@
 home:    Home
 my-lists:    Meine Listen
+login:    Anmelden
+logout:    Abmelden
+nickname:    Benutzername
+password:    Passwort
+register:    Registrieren
+first-name:    Vorname
+last-name:    Nachname
+email:    E-Mail
+repeat-password:    Passwort wiederholen

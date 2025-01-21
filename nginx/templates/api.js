@@ -189,7 +189,7 @@ class Api {
         window.location.reload();
     }
 
-    static async show_popup(title, content, options=[], image=undefined) {
+    static async show_popup(title, content, options=[], image=undefined, default_data=undefined) {
         Api.close_popup();
 
         const popup = document.querySelector(".popup");
@@ -224,6 +224,15 @@ class Api {
     
                 answers.appendChild(element);
             }
+
+            popup.addEventListener("click", (ev) => {
+                Api._popup_reject = null;
+                    this.close_popup();
+                    resolve({
+                        "event": ev,
+                        "data": default_data
+                    });
+            })
         });
     }
 

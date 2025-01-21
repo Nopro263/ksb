@@ -82,7 +82,9 @@ create.addEventListener("click", async (ev) => {
                 text: "%more-information%",
                 data: "more"
             }
-        ]
+        ],
+        undefined,
+        "no"
     );
 
     if(answer.data == "more") {

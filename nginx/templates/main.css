@@ -49,12 +49,16 @@
     --br-sharp: var(--margin-xxs);
 
     --nav-default-color: black;
-    --nav-active-color: blue;
+    --nav-active-color: var(--primary-100);
 
-    --input-text-default-background: whitesmoke;
-    --input-text-active-background: whitesmoke;
-    --input-text-default-border: var(--_border) transparent;
-    --input-text-active-border: var(--_border) lightgrey;
+    --input-default-background: var(--white-95);
+    --input-hover-background: var(--white-95);
+    --input-active-background: var(--white-95);
+
+
+    --input-default-border: var(--_border) transparent;
+    --input-hover-border: var(--_border) transparent;
+    --input-active-border: var(--_border) var(--white-70);
 }
 
 html:not(:has(.scrolling-body)) {
@@ -90,4 +94,26 @@ body {
 .col {
     display: flex;
     flex-direction: column;
+}
+
+.primary {
+    --input-default-background: var(--primary-100);
+    --input-active-background: var(--primary-90);
+    --input-hover-background: var(--primary-90);
+
+
+    --input-default-border: var(--_border) transparent;
+    --input-hover-border: var(--_border) transparent;
+    --input-active-border: var(--_border) var(--primary-70);
+}
+
+.secondary {
+    --input-default-background: var(--secondary-100);
+    --input-active-background: var(--secondary-90);
+    --input-hover-background: var(--secondary-90);
+
+
+    --input-default-border: var(--_border) transparent;
+    --input-hover-border: var(--_border) transparent;
+    --input-active-border: var(--_border) var(--secondary-70);
 }

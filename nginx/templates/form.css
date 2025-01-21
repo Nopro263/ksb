@@ -8,22 +8,31 @@ form {
     height: fit-content;
 }
 
-input[type=text],
-input[type=password] {
+input, button, select {
     border-width: 1px;
     border-radius: var(--br-sharp);
 
     padding: var(--margin-xs);
     margin: var(--margin-xxs);
 
-    background-color: var(--input-text-default-background);
-    border: var(--input-text-default-border);
+    background-color: var(--input-default-background);
+    border: var(--input-default-border);
 }
 
-input[type=text]:active, input[type=text]:focus,
-input[type=password]:active, input[type=password]:focus {
-    background-color: var(--input-text-active-background);
-    border: var(--input-text-active-border);
+input:hover,
+button:hover,
+select:hover {
+    background-color: var(--input-hover-background);
+    border: var(--input-hover-border);
+
+    outline: none;
+}
+
+input:active, input:focus
+button:active, button:focus,
+select:active, select:focus {
+    background-color: var(--input-active-background);
+    border: var(--input-active-border);
 
     outline: none;
 }

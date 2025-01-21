@@ -29,7 +29,7 @@ def parse_translations(path: str) -> dict:
     with open(path, "r") as f:
         for line in f.readlines():
             s = line.split(":    ")
-            translations[s[0]] = s[1].strip()
+            translations[s[0]] = s[1].strip().replace("\\n", "\n")
     
     return translations
 

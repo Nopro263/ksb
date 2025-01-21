@@ -1,3 +1,30 @@
 main {
     align-items: center;
 }
+
+#register {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: calc(100% - var(--margin-xxs) * 2);
+    margin: var(--margin-xxs);
+}
+
+#register > span.content {
+    width: fit-content;
+    color: black;
+}
+
+#register > span:not(.content) {
+    flex: 1 1 auto;
+    height: 2px;
+    background-color: black;
+}
+
+#register > span:not(.content):first-of-type {
+    margin-right: var(--margin-xxs);
+}
+
+#register > span:not(.content):last-of-type {
+    margin-left: var(--margin-xxs);
+}

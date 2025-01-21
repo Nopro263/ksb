@@ -7,10 +7,10 @@
 
 {% block main %}
 <form class="col">
-    <input type="text" id="username" autofocus placeholder="Nickname"/>
-    <input type="password" id="password" placeholder="Passwort"/>
+    <input type="text" id="username" autofocus placeholder="%nickname%"/>
+    <input type="password" id="password" placeholder="%password%"/>
     <div class="row" id="msg"></div>
-    <input type="submit" value="Login" id="submit" class="primary"/>
-    <input type="button" value="Registrieren" class="secondary" id="register" onclick="window.location.pathname = '/register' "/>
+    <input type="submit" value="%login%" id="submit" class="primary"/>
+    <input type="button" value="%register%" class="secondary" id="register" onclick="window.location.pathname = '/register' "/>
 </form>
 {% endblock %}

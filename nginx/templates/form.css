@@ -17,6 +17,8 @@ input, button, select {
 
     background-color: var(--input-default-background);
     border: var(--input-default-border);
+
+    outline: none;
 }
 
 input:hover,
@@ -24,15 +26,11 @@ button:hover,
 select:hover {
     background-color: var(--input-hover-background);
     border: var(--input-hover-border);
-
-    outline: none;
 }
 
-input:active, input:focus
+input:active, input:focus,
 button:active, button:focus,
 select:active, select:focus {
     background-color: var(--input-active-background);
     border: var(--input-active-border);
-
-    outline: none;
 }

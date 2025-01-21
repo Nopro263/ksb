@@ -1,7 +1,7 @@
 :root {
     --primary-100: #6ea71a;
     --secondary-100: #f89d0e;
-    --tertiary-100: blue;
+    --tertiary-100: red;
     --white-100: white;
 
     --primary-90: lch(from var(--primary-100) calc(l * 0.9) c h);

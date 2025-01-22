@@ -1,0 +1,37 @@
+table {
+    border-collapse: collapse;
+}
+
+thead > tr,
+tbody > tr {
+    border-bottom: var(--border);
+}
+
+table:has(tfoot) > tbody > tr:last-of-type {
+    border-bottom-color: var(--white-50);
+}
+
+table:not(:has(tfoot)) > tbody > tr:last-of-type {
+    border-bottom-color: unset;
+}
+
+thead > tr {
+    border-bottom-color: var(--white-50);
+}
+
+thead td {
+    padding-right: var(--margin-l);
+}
+
+td:has(button) {
+    display: flex;
+    justify-content: center;
+}
+
+td {
+    padding-right: var(--margin-s);
+}
+
+td:first-child {
+    padding-left: var(--margin-s);
+}

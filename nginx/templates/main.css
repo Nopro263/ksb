@@ -82,6 +82,12 @@ body:not(.scrolling-body) > main {
     justify-content: center;
 }
 
+body:not(.scrolling-body) > main {
+    flex-grow: unset;
+    flex-shrink: unset;
+    flex-basis: unset;
+}
+
 body {
     font: var(--pui);
 }

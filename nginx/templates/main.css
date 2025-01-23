@@ -51,14 +51,18 @@
     --nav-default-color: black;
     --nav-active-color: var(--primary-100);
 
-    --input-default-background: var(--white-95);
-    --input-hover-background: var(--white-95);
-    --input-active-background: var(--white-95);
+    --input-disabled-color: var(--white-75);
+
+    --input-default-background: var(--white-90);
+    --input-hover-background: var(--white-90);
+    --input-active-background: var(--white-90);
+    --input-disabled-background: var(--white-95);
 
 
     --input-default-border: var(--_border) transparent;
     --input-hover-border: var(--_border) transparent;
     --input-active-border: var(--_border) var(--white-70);
+    --input-disabled-border: var(--_border) transparent;
 }
 
 html:not(:has(.scrolling-body)) {

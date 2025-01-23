@@ -34,3 +34,11 @@ select:active, select:focus {
     background-color: var(--input-active-background);
     border: var(--input-active-border);
 }
+
+input:disabled,
+button:disabled,
+select:disabled {
+    background-color: var(--input-disabled-background);
+    border: var(--input-disabled-border);
+    color: var(--input-disabled-color)
+}

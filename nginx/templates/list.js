@@ -30,7 +30,7 @@ const main = async () => {
     let c = 0;
 
     for (const article of list.articles) {
-        articles.innerHTML += `<tr id="A${article.id}" class="article"><td>${i}</td><td>${article.name}</td><td>${article.size}</td><td>${article.price}€</td><td>${article.deleted ? "" : "<button>X</button>"}</td></tr>`;
+        articles.innerHTML += `<tr id="A${article.id}" class="article"><td>${i}</td><td>${article.name}</td><td>${article.size}</td><td>${article.price}€</td><td><button${article.deleted ? " disabled" : ""}>X</button></td></tr>`;
         
         if(article.deleted) {
             articles.querySelector(`#A${article.id}`).classList.add("deleted");

@@ -15,3 +15,8 @@ information-list-price:    Creating a list comes with the price of 10€
 create-it:    Yes, do it
 dont-do-it:    No, don't do it
 more-information:    More Information
+name:    name
+size:    size
+price:    price
+delete:    delete
+add:    add

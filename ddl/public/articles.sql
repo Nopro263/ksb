@@ -7,11 +7,14 @@ create table articles
     list_id    integer               not null
         constraint articles_list_id_fk
             references list,
-    barcode    integer,
+    barcode    char(12),
     imported   boolean default false not null,
     invoice_id integer
         constraint articles_invoices_id_fk
-            references invoices
+            references invoice,
+    deleted    boolean default false not null,
+    size       varchar(10),
+    price      numeric               not null
 );
 
 alter table articles

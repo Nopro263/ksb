@@ -14,7 +14,8 @@ create table articles
             references invoice,
     deleted    boolean default false not null,
     size       varchar(10),
-    price      numeric               not null
+    price      numeric               not null,
+    id_in_list integer               not null
 );
 
 alter table articles

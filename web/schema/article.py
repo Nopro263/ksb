@@ -20,6 +20,7 @@ class Article(CreateArticle, SQLModel, table=True):
     barcode: Optional[str] = None
     list_id: int = Field(default=None, foreign_key="list.id")
     invoice_id: Optional[int] = Field(default=None, foreign_key="invoice.id")
+    id_in_list: int
 
     def gen_barcode(self):
         year = datetime.datetime.now().year

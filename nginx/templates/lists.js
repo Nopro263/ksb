@@ -16,6 +16,7 @@ if(Api.getConfig().is_employee) {
 const main = async () => {
     const _lists = await Api.get_lists();
     const self = await Api.get_self();
+
     listcontainer.innerHTML = "";
 
     for (let index = 0; index < _lists.length; index++) {
@@ -28,12 +29,12 @@ const main = async () => {
 
         const id = document.createElement("p");
         id.classList.add("id");
-        id.innerText = `#${index + 1}`;
+        id.innerText = `#${_list.id_in_user}`;
 
         div.appendChild(id);
 
         const name = document.createElement("p");
-        name.innerText = `${self.nickname}${index + 1}`;
+        name.innerText = `${self.nickname}${_list.id_in_user}`;
         div.appendChild(name);
 
         const elementCount = document.createElement("p");

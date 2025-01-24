@@ -23,6 +23,10 @@ const main = async () => {
         return;
     }
 
+    const self = await Api.get_self();
+
+    document.getElementById("list").innerText = `${self.nickname} ${list.id_in_user}`
+
     articles.innerHTML = "";
 
     let i = 1;

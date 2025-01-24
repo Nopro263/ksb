@@ -25,7 +25,7 @@ async def createList(db: DB, auth: Auth[Clearance.REGISTERED]) -> List:
     if(lists+1 > config.max_lists):
         raise HTTPException(status_code=402, detail=f"no more than {config.max_lists} lists are allowed")
 
-    l = List(owner_id=auth.userId)
+    l = List(owner_id=auth.userId, id_in_user=lists+1)
     db.add(l)
     db.commit()
     db.refresh(l)
@@ -37,7 +37,7 @@ async def getLists(db: DB, auth: Auth[Clearance.REGISTERED]) -> _List[List]:
     return db.exec(select(List).where(List.owner_id == auth.userId)).all()
 
 @router.get("/of/{userId:int}")
-async def getListsOfUser(db: DB, auth: Auth[Clearance.REGISTERED], userId: int) -> _List[List]:
+async def getListsOfUser(db: DB, auth: Auth[Clearance.EMPLOYEE], userId: int) -> _List[List]:
     return db.exec(select(List).where(List.owner_id == userId)).all()
 
 @router.post("/{listId:int}")
@@ -48,11 +48,12 @@ async def createArticle(db: DB, listId: int, auth: Auth[Clearance.REGISTERED], a
     
     config = get_config_for_user(auth)
     articles = len(db.exec(select(Article.id).where(and_(Article.list_id == listId, Article.deleted == False)).order_by(Article.id)).all())
-    print(articles)
+    all_articles = len(db.exec(select(Article.id).where(Article.list_id == listId).order_by(Article.id)).all())
+
     if(articles+1 > config.max_items_per_list):
         raise HTTPException(status_code=402, detail=f"no more than {config.max_items_per_list} items are allowed per list")
 
-    a = Article(**article.model_dump(), imported=False, list_id=listId, deleted=False)
+    a = Article(**article.model_dump(), imported=False, list_id=listId, deleted=False, id_in_list=all_articles+1)
     db.add(a)
     db.commit()
     db.refresh(a)

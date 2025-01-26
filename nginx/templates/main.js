@@ -22,7 +22,7 @@ document.querySelector("#logout").addEventListener("click", (ev) => {
     Api.logout();
 })
 
-const nav_component = document.querySelector(`a.nav-component[href="${window.location.pathname}"]`);
+const nav_component = document.querySelector(`a.nav-component[href="${window.location.pathname}"]`) || window.location.pathname === "/list" ? document.querySelector(`a.nav-component[href="/lists"]`) : undefined;
 
 if(nav_component) {
     nav_component.classList.add("active");

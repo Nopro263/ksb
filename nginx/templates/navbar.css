@@ -41,6 +41,10 @@ nav > .nav-component:last-child {
     margin-left: auto;
 }
 
+#login-logout {
+    margin-right: var(--margin-m);
+}
+
 #login-logout.loggedIn > #login {
     display: none;
 }

@@ -21,3 +21,5 @@ price:    price
 delete:    delete
 add:    add
 article-list:    Article list
+amount:    amount
+open:    open

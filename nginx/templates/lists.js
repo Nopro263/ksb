@@ -1,6 +1,6 @@
 import Api from './api.js'
 
-const listcontainer = document.querySelector(".listcontainer");
+const listcontainer = document.querySelector("tbody");
 const create = document.querySelector("#create");
 
 await Api.checkLoggedIn();
@@ -24,35 +24,44 @@ const main = async () => {
         const list = await Api.get_list(_list.id);
         const articleCount = list.articles.filter(a => !a.deleted).length;
 
-        const div = document.createElement("a");
-        div.classList.add("list");
+        const tr = document.createElement("tr");
 
-        const id = document.createElement("p");
-        id.classList.add("id");
-        id.innerText = `#${_list.id_in_user}`;
+        const id = document.createElement("td");
+        id.innerText = `${_list.id_in_user}`;
 
-        div.appendChild(id);
+        tr.appendChild(id);
 
-        const name = document.createElement("p");
+        const name = document.createElement("td");
         name.innerText = `${self.nickname}${_list.id_in_user}`;
-        div.appendChild(name);
+        tr.appendChild(name);
 
-        const elementCount = document.createElement("p");
-        elementCount.classList.add("elementCount");
+        const elementCount = document.createElement("td");
         elementCount.innerText = `${articleCount}/${Api.getConfig().max_items_per_list}`;
+
         if(articleCount >= Api.getConfig().max_items_per_list) {
-            div.classList.add("full");
+            tr.classList.add("full");
         }
 
         if(articleCount < Api.getConfig().max_items_per_list && articleCount > Api.getConfig().max_items_per_list - 10) {
-            div.classList.add("nearly-full");
+            tr.classList.add("nearly-full");
         }
 
-        div.appendChild(elementCount);
+        tr.appendChild(elementCount);
 
-        div.href = `/list?id=${list.id}`;
+        const openTd = document.createElement("td");
+        const btn = document.createElement("button");
+        btn.classList.add("success");
+        btn.innerText = `%open%`;
 
-        listcontainer.appendChild(div);
+        btn.addEventListener("click", (ev) => {
+            window.location = `/list?id=${_list.id}`;
+        });
+
+        openTd.appendChild(btn);
+
+        tr.appendChild(openTd);
+
+        listcontainer.appendChild(tr);
     }
 
     create.innerHTML = `%create-list% (${_lists.length}/${Api.getConfig().max_lists})`;

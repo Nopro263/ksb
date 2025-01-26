@@ -6,6 +6,15 @@
 {% endblock %}
 
 {% block main %}
-<div class="listcontainer"></div>
-<button id="create">%create-list%</button>
+<div>
+<table>
+    <thead>
+        <tr><td>#</td><td>%name%</td><td>%amount%</td></tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+        <tr><td rowspan="3"><button id="create">%create-list%</button></td></tr>
+    </tfoot>
+</table>
+</div>
 {% endblock %}

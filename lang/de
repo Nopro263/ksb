@@ -25,10 +25,10 @@ amount:    Anzahl
 open:    Öffnen
 username:    Benutzername
 view:    Ansehen
-barcode:    
-import:    
-article:    
-sum:    
-sell:    
-print:    
-sellers:    
+barcode:    Barcode
+import:    Importieren
+article:    Artikel
+sum:    Summe
+sell:    Verkaufen
+print:    Drucken
+sellers:    Verkäufer

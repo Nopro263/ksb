@@ -12,9 +12,9 @@
 <table class="invoice">
     <thead class="thead">
         <tr>
-            <td>Artikel</td>
-            <td>Größe</td>
-            <td>Preis</td>
+            <td>%article%</td>
+            <td>%size%</td>
+            <td>%price%</td>
         </tr>
     </thead>
     <tbody>
@@ -22,7 +22,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="2" class="bold">Summe</td>
+            <td colspan="2" class="bold">%sum%</td>
             <td id="sum">42€</td>
         </tr>
     </tfoot>
@@ -31,9 +31,9 @@
 <form>
     <div class="row" id="msg"></div>
     <div class="row">
-        <input type="text" id="barcode" autofocus/>
-        <input type="submit" value="Verkaufen" id="submit"/>
+        <input type="text" id="barcode" autofocus placeholder="%barcode%"/>
+        <input type="submit" value="%sell%" id="submit"/>
     </div>
-    <input type="button" id="print" value="Drucken">
+    <input type="button" id="print" value="%print%">
 </form>
 {% endblock %}

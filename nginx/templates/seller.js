@@ -21,9 +21,9 @@ lists.forEach(list => {
     <thead class="thead">
         <tr>
             <td>#</td>
-            <td>Name</td>
-            <td>Größe</td>
-            <td>Preis</td>
+            <td>%name%</td>
+            <td>%size%</td>
+            <td>%price%</td>
         </tr>
     </thead>
     <tbody></tbody>

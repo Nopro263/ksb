@@ -19,7 +19,6 @@ const main = async () => {
     } catch({response, json}) {
         alert(json.detail);
         window.location.pathname = "/";
-        window.location.search = "";
         return;
     }
 

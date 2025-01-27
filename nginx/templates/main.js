@@ -3,14 +3,14 @@ import Api from "./api.js";
 if(await Api.isLoggedIn()) {
     const config = Api.getConfig();
     if(config.is_employee) {
-        document.querySelector("nav").innerHTML = `<a class="nav-component right" href="/">Home</a>
-        <a class="nav-component" href="/sellers">Verkäufer</a>
-        <a class="nav-component" href="/sell">Verkaufen</a>
-        <a class="nav-component left" href="/import">Importieren</a>
+        document.querySelector("nav").innerHTML = `<a class="nav-component right" href="/">%home%</a>
+        <a class="nav-component" href="/sellers">%sellers%</a>
+        <a class="nav-component" href="/sell">%sell%</a>
+        <a class="nav-component left" href="/import">%import%</a>
 
         <div class="nav-component" id="login-logout">
-            <a href="/login" id="login">Login</a>
-            <a href="#" id="logout">Logout</a>
+            <a href="/login" id="login">%login%</a>
+            <a href="#" id="logout">%logout%</a>
         </div>`
     }
 

@@ -17,7 +17,7 @@ const main = document.querySelector("main");
 const lists = await Api.get_lists_of_user(user.id);
 
 lists.forEach(list => {
-    main.innerHTML += `<h1>Liste #${list.id}</h1><table class="articles" id="L${list.id}">
+    main.innerHTML += `<div style="display: flex; flex-direction: column;"><h1>${user.nickname}${list.id}</h1><table class="articles" id="L${list.id}">
     <thead class="thead">
         <tr>
             <td>#</td>
@@ -27,7 +27,7 @@ lists.forEach(list => {
         </tr>
     </thead>
     <tbody></tbody>
-</table>`;
+</table></div>`;
 });
 
 lists.forEach(async list => {

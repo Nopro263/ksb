@@ -8,7 +8,12 @@ form {
     height: fit-content;
 }
 
-input, button, select {
+.button {
+    text-decoration: none;
+    color: black;
+}
+
+input, button, select, .button {
     border-width: 1px;
     border-radius: var(--br-sharp);
 
@@ -23,21 +28,25 @@ input, button, select {
 
 input:hover,
 button:hover,
-select:hover {
+select:hover,
+.button:hover {
     background-color: var(--input-hover-background);
     border: var(--input-hover-border);
 }
 
 input:active, input:focus,
 button:active, button:focus,
-select:active, select:focus {
+select:active, select:focus,
+.button:active, .button:focus {
     background-color: var(--input-active-background);
     border: var(--input-active-border);
 }
 
 input:disabled,
 button:disabled,
-select:disabled {
+select:disabled,
+.button:disabled,
+.button.disabled {
     background-color: var(--input-disabled-background);
     border: var(--input-disabled-border);
     color: var(--input-disabled-color)

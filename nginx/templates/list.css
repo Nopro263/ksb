@@ -1,0 +1,4 @@
+.deleted {
+    text-decoration: line-through;
+    background-color: var(--white-90);
+  }

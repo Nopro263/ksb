@@ -76,7 +76,7 @@ def translate():
             if translation not in data:
                 data[translation] = ""
         
-        for key in data.keys():
+        for key in list(data.keys()):
             if key not in translations:
                 del data[key]
         

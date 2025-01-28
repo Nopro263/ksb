@@ -16,6 +16,10 @@ const main = document.querySelector("main");
 
 const lists = await Api.get_lists_of_user(user.id);
 
+if(lists.length === 0) {
+    main.innerHTML = `<h1 class="message">%no-items-found%</h1>`
+}
+
 lists.forEach(list => {
     main.innerHTML += `<div style="display: flex; flex-direction: column;"><h1>${user.nickname}${list.id}</h1><table class="articles" id="L${list.id}">
     <thead class="thead">

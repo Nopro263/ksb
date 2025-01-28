@@ -33,3 +33,4 @@ sell:    sell
 print:    print
 sellers:    sellers
 invoice:    invoice
+no-items-found:    no items were found

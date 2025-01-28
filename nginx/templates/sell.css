@@ -13,4 +13,13 @@ h1,p {
     height: fit-content;
     margin-top: auto;
     margin-bottom: auto;
+    margin-left: auto;
+}
+
+p {
+    margin-top: 0;
+}
+
+form {
+    display: none;
 }

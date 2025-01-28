@@ -1,0 +1,10 @@
+main {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: start !important;
+}
+
+h1,p {
+    width: fit-content;
+}

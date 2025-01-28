@@ -25,8 +25,8 @@ if(search.get("id") === null) {
     });
 }
 
-id.innerHTML = `Rechnung #${invoice.id}`;
-creation_time.innerHTML = invoice.creation_time;
+id.innerHTML = `%invoice% #${invoice.id}`;
+creation_time.innerHTML = new Date(invoice.creation_time).toLocaleTimeString();
 
 document.querySelector("form").addEventListener("submit", async (e) => {
     e.preventDefault();

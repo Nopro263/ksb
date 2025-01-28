@@ -8,3 +8,9 @@ main {
 h1,p {
     width: fit-content;
 }
+
+.row > input {
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+}

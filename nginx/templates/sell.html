@@ -7,7 +7,7 @@
 
 {% block main %}
 <div>
-<h1 id="id"></h1>
+    <div class="row"><h1 id="id"></h1><input type="button" id="print" value="%print%" class="success" form="form"></div>
 <p id="creation_time"></p>
     
 <table class="invoice">
@@ -24,18 +24,17 @@
     <tfoot>
         <tr>
             <td colspan="2" class="bold">%sum%</td>
-            <td id="sum">42€</td>
+            <td id="sum">0€</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="text" id="barcode" autofocus placeholder="%barcode%" form="form"/></td>
+            <td><input type="submit" value="%sell%" id="submit" class="information" form="form"/></td>
         </tr>
     </tfoot>
 </table>
 
-<form>
+<form id="form">
     <div class="row" id="msg"></div>
-    <div class="row">
-        <input type="text" id="barcode" autofocus placeholder="%barcode%"/>
-        <input type="submit" value="%sell%" id="submit"/>
-    </div>
-    <input type="button" id="print" value="%print%">
 </form>
 </div>
 {% endblock %}

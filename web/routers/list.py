@@ -1,12 +1,16 @@
 import datetime
+import hashlib
+import os
 
 import barcode
-from fastapi import APIRouter, Body, HTTPException
+from fastapi import APIRouter, Body, HTTPException, Request
 from typing import Annotated, List as _List
 
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 from sqlmodel import select, and_
 
-from ..schema.user import get_config_for_user
+from ..schema.user import User, get_config_for_user
 
 from ..database import DB
 from ..schema.article import CreateArticle, Article
@@ -14,6 +18,11 @@ from ..schema.invoice import Invoice
 from ..schema.list import List
 from ..schema.models import ListResponse
 from ..security import Auth, Clearance
+
+secrets = {}
+
+templates = Jinja2Templates(directory="templates")
+
 
 router = APIRouter(prefix="/list")
 
@@ -82,7 +91,7 @@ async def getList(db: DB, listId: int, auth: Auth[Clearance.REGISTERED]) -> List
 
     return ListResponse(**list.model_dump(), articles=articles)
 
-@router.delete("/{listId}/{articleId}")
+@router.delete("/{listId:int}/{articleId}")
 async def deleteArticle(db: DB, listId: int, articleId: int, auth: Auth[Clearance.REGISTERED]) -> str:
     list = db.exec(select(List).where(List.id == listId)).one()
     if list.owner_id != auth.userId:
@@ -94,3 +103,30 @@ async def deleteArticle(db: DB, listId: int, articleId: int, auth: Auth[Clearanc
     db.refresh(article)
 
     return "ok"
+
+
+@router.get("/{listId:int}/print")
+def get_print_list_link(db: DB, auth: Auth[Clearance.REGISTERED], listId: int, request: Request) -> str:
+    list = db.exec(select(List).where(List.id == listId)).one()
+    if list.owner_id != auth.userId:
+        raise HTTPException(status_code=403, detail="not your list")
+    
+    s = hashlib.sha256(f"{listId}{os.environ['SECRET']}".encode("utf-8")).hexdigest()
+    secrets[listId] = s
+    return str(request.url_for("print_list", listId=listId, secret=s))
+
+@router.get("/{listId:int}/print/{secret:str}")
+def print_list(db: DB, listId: int, secret: str, request: Request) -> HTMLResponse:
+    if listId not in secrets or secrets[listId] != secret:
+        raise HTTPException(status_code=403, detail="invalid print secret")
+    del secrets[listId]
+
+    list = db.exec(select(List).where(List.id == listId)).one()
+    user = db.exec(select(User).where(User.id == list.owner_id)).one()
+    articles = db.exec(select(Article).where(Article.list_id == listId).order_by(Article.id)).all()
+
+
+    s = sum([a.price for a in articles if not a.deleted])
+    ar = sum([1 for a in articles if not a.deleted])
+
+    return templates.TemplateResponse("list.html", {"list": list, "articles": articles, "request": request, "user": user, "data": {"sum":s, "amount":ar}})

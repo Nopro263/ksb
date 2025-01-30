@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste {{ list.id }}</title>
+
+    <style>
+        html {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: x-large;
+        }
+        table {
+            border-collapse: collapse;
+            width: 50vw;
+        }
+        td {
+            border: 1px solid black;
+        }
+        thead {
+            font-weight: bold;
+        }
+
+        table {
+            margin-bottom: 2rem;
+        }
+        .articles {
+            margin-left: 5%;
+            width: 90%;
+        }
+        thead > tr > td:not(:nth-child(2)) {
+            width: fit-content;
+        }
+        thead > tr > td:nth-child(2) {
+            width: max-content;
+            white-space: nowrap;
+        }
+        .deleted {
+            background-color: lch(from white calc(l * 0.9) c h);;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>Kennwort: {{ user.nickname }} {{ list.id_in_user }}</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Telefonnummer: {{ user.phone_number }}</td>
+            </tr>
+            <tr>
+                <td>Name: {{ user.first_name }} {{ user.last_name }}</td>
+            </tr>
+            <tr>
+                <td>Adresse: {{ user.address }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="articles">
+        <thead>
+            <tr>
+                <td>Nr</td>
+                <td>Artikel/Bezeichnung</td>
+                <td>Barcode</td>
+                <td>Größe</td>
+                <td>Preis</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+            <tr {% if article.deleted %}class="deleted"{% endif %}>
+                <td>{{ article.id_in_list }}</td>
+                <td>{{ article.name }}</td>
+                <td>{{ article.barcode }}</td>
+                <td>{{ article.size }}</td>
+                <td>{{ article.price }}€</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"><div><div class="left">{{ data.amount }} Artikel</div><div class="right">Summe: {{ data.sum }} Euro</div></div></td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

@@ -53,5 +53,6 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 
 document.querySelector("#print").addEventListener("click", async (e) => {
     const url = await Api.get_invoice_print_link(invoice.id);
-    window.open(url, '_blank').focus();
+    const w = window.open(url, '_blank');
+    w.focus();
 })

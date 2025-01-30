@@ -38,3 +38,6 @@ phone:    Telefonnummer
 address:    Adresse
 settings:    Einstellungen
 account:    Benutzer
+save:    Speichern
+save-changes:    Änderungen speichern
+discard-changes:    Änderungen verwerfen

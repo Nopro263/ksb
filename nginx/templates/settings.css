@@ -1,0 +1,15 @@
+main {
+    align-items: center;
+}
+
+.row > input:first-child:last-child {
+    width: 100%;
+}
+
+.row > select:first-child:last-child {
+    width: 100%;
+}
+
+.invalid {
+    border-color: var(--danger-120) !important;
+}

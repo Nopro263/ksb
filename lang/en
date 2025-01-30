@@ -38,3 +38,6 @@ phone:    phone number
 address:    address
 settings:    Settings
 account:    account
+save:    save
+save-changes:    save changes
+discard-changes:    discard changes

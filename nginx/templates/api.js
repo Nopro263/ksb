@@ -63,8 +63,8 @@ class Api {
         return await sendAuthJSONCall("/user/me", "GET", undefined, Api.token);
     }
 
-    static async set_self(first_name, last_name, email) {
-        let data = {first_name, last_name, email};
+    static async set_self(first_name, last_name, email, address, phone) {
+        let data = {first_name, last_name, email, address, phone_number: phone};
         return await sendAuthJSONCall("/user/me", "POST", data, Api.token);
     }
 
@@ -204,7 +204,7 @@ class Api {
         answers.innerHTML = "";
 
         h1.innerText = title;
-        c.innerText = content;
+        c.innerHTML = content;
         img.src = image ? image : "https://cdn-icons-png.flaticon.com/512/4201/4201973.png";
 
         popup.style.display = "flex";

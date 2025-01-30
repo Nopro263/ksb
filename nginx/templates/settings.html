@@ -1,0 +1,34 @@
+{% extends "base.jinja2.html" %}
+
+{% block head %}
+<script type="module" src="settings.js"></script>
+<link rel="stylesheet" href="settings.css">
+{% endblock %}
+
+{% block main %}
+<form>
+    <div class="row">
+        <select disabled>
+            <option value="nickname" disabled selected id="username"></option>
+        </select>
+    </div>
+    <div class="row">
+        <input type="text" id="first_name" placeholder="%first-name%"/>
+        <input type="text" id="last_name" placeholder="%last-name%"/>
+    </div>
+    <div class="row">
+        <input type="email" id="email" placeholder="%email%"/>
+    </div>
+    <div class="row">
+        <input type="text" id="phone" placeholder="%phone%"/>
+    </div>
+    <div class="row">
+        <input type="text" id="address" placeholder="%address%"/>
+    </div>
+    <div class="row">
+        <input type="password" id="password" placeholder="%password%" disabled value="abcdef"/>
+    </div>
+    <div class="row" id="msg"></div>
+    <div class="row"><input type="submit" value="%save%" id="submit" class="primary"/></div>
+</form>
+{% endblock %}

@@ -11,5 +11,5 @@ main {
 }
 
 .row > select:first-child:last-child:has(> option[value=nickname]:checked) {
-    border-color: var(--tertiary-120);
+    border-color: var(--danger-120);
 }

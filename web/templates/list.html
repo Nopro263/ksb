@@ -15,7 +15,7 @@
             width: 50vw;
         }
         td {
-            border: 1px solid black;
+            border: 2px solid black;
         }
         thead {
             font-weight: bold;
@@ -40,6 +40,49 @@
         }
         .right {
             font-weight: bold;
+        }
+
+        .article {
+            font-size:medium;
+
+            border: 2px dashed black;
+        }
+
+        .article > .top {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            border-bottom: 2px solid black;
+        }
+
+        .article > .name {
+            border-bottom: 2px solid black;
+        }
+
+        .article > .middle {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            border-bottom: 2px solid black;
+        }
+
+        .article > .bottom {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .cropout {
+            width: 90vw;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cropout p {
+            margin-top: 0;
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -89,6 +132,48 @@
                 <td colspan="5"><div><div class="left">{{ data.amount }} Artikel</div><div class="right">Summe: {{ data.sum }} Euro</div></div></td>
             </tr>
         </tfoot>
+    </table>
+
+    <table class="cropout">
+        <tbody>
+            {% for article in articles %}
+            <tr>
+                <td class="article">
+                    <div class="top">
+                        <p>{{ user.nickname }} {{ list.id_in_user }}</p>
+                        <p>#{{ article.id_in_list }}</p>
+                    </div>
+                    <div class="name">
+                        {{ article.name }}
+                    </div>
+                    <div class="middle">
+                        <p>Größe: {{ article.size }}</p>
+                        <p>{{ article.price}} EURO</p>
+                    </div>
+                    <div class="bottom">
+                        <img src="/api/article/{{ article.id }}/barcode" />
+                    </div>
+                </td>
+
+                <td class="article">
+                    <div class="top">
+                        <p>{{ user.nickname }} {{ list.id_in_user }}</p>
+                        <p>#{{ article.id_in_list }}</p>
+                    </div>
+                    <div class="name">
+                        {{ article.name }}
+                    </div>
+                    <div class="middle">
+                        <p>Größe: {{ article.size }}</p>
+                        <p>{{ article.price}} EURO</p>
+                    </div>
+                    <div class="bottom">
+                        <img src="/api/article/{{ article.id }}/barcode" />
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </body>
 </html>

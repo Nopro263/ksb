@@ -10,7 +10,13 @@ if(await Api.isLoggedIn()) {
 
         <div class="nav-component" id="login-logout">
             <a href="/login" id="login">%login%</a>
-            <a href="#" id="logout">%logout%</a>
+            <div class="nav-dropdown">
+                <div class="nav-item nav-name">%account%</div>
+                <div class="nav-items">
+                    <a class="nav-item" id="settings" href="/settings">%settings%</a>
+                    <div class="nav-item" id="logout">%logout%</div>
+                </div>
+            </div>
         </div>`
     }
 

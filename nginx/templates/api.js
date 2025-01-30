@@ -89,6 +89,10 @@ class Api {
         return await sendAuthJSONCall("/list/" + list, "GET", undefined, Api.token);
     }
 
+    static async get_list_print_link(id) {
+        return await sendAuthJSONCall("/list/" + id + "/print", "GET", undefined, Api.token);
+    }
+
     static async get_lists() {
         return await sendAuthJSONCall("/list", "GET", undefined, Api.token);
     }

@@ -70,3 +70,9 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     await Api.create_article(id, name.value, size.value, price.value);
     main();
 });
+
+document.querySelector("#print").addEventListener("click", async (e) => {
+    const url = await Api.get_list_print_link(id);
+    const w = window.open(url, '_blank');
+    w.focus();
+});

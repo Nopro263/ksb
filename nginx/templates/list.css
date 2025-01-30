@@ -2,3 +2,13 @@
     text-decoration: line-through;
     background-color: var(--white-90);
   }
+.row {
+  justify-content: space-between;
+}
+
+.row > button {
+  width: fit-content;
+  height: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+}

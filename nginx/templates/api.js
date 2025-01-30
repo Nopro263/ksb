@@ -54,8 +54,8 @@ class Api {
         return await sendApiCall("/user/usernames", "GET");
     }
 
-    static async register(first_name, last_name, email, nickname, password) {
-        let data = {first_name, last_name, email, nickname, password};
+    static async register(first_name, last_name, email, nickname, password, address, phone) {
+        let data = {first_name, last_name, email, nickname, password, address, phone_number: phone};
         return await sendApiCall("/user/register", "PUT", JSON.stringify(data), "application/json");
     }
 

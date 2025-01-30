@@ -6,6 +6,8 @@ const username = document.getElementById("username");
 const email = document.getElementById("email");
 const first_name = document.getElementById("first_name");
 const last_name = document.getElementById("last_name");
+const phone = document.getElementById("phone");
+const address = document.getElementById("address");
 const password = document.getElementById("password");
 const password2 = document.getElementById("password2");
 const msg = document.getElementById("msg");
@@ -23,7 +25,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     }
     try {
         document.querySelector("form").classList.remove("wrong");
-        await Api.register(first_name.value, last_name.value, email.value, username.value, password.value);
+        await Api.register(first_name.value, last_name.value, email.value, username.value, password.value, address.value, phone.value);
         await Api.login(username.value, password.value);
     } catch({response, json}) {
         document.querySelector("form").classList.add("wrong");

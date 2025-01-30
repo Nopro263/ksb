@@ -15,6 +15,8 @@ class _PrivateUser(_Base):
     first_name: str
     last_name: str
     email: EmailStr
+    address: str
+    phone_number: str
 
 class _Password(BaseModel):
     password: str

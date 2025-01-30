@@ -29,7 +29,8 @@ nav > .nav-component > * {
 }
 
 nav > .nav-component.active,
-nav > .nav-component.active > * {
+nav > .nav-component.active > *,
+nav > .nav-component:hover {
     color: var(--nav-active-color);
 }
 
@@ -41,6 +42,39 @@ nav > .nav-component:last-child {
     margin-left: auto;
 }
 
+nav .nav-dropdown {
+    position: relative;
+}
+
+nav .nav-dropdown > .nav-items {
+    display: none;
+    position: absolute;
+    margin-top: calc(var(--margin-m) + 2px);
+    right: calc(-1 * var(--margin-m) - 2px);
+
+    width: 5rem;
+
+    border: var(--border);
+
+    flex-direction: column;
+    align-items: center;
+}
+
+nav .nav-dropdown > .nav-items > .nav-item {
+    padding-top: var(--margin-xs);
+    padding-bottom: var(--margin-xs);
+}
+
+nav .nav-dropdown:hover > .nav-items,
+nav #login-logout:hover > .nav-dropdown > .nav-items,
+nav .nav-dropdown > .nav-items:hover {
+    display: flex;
+}
+
+#logout {
+    width: fit-content;
+}
+
 #login-logout {
     margin-right: var(--margin-m);
 }
@@ -49,6 +83,16 @@ nav > .nav-component:last-child {
     display: none;
 }
 
-#login-logout:not(.loggedIn) > #logout {
+#login-logout:not(.loggedIn) > .nav-dropdown {
     display: none;
+}
+
+.nav-item {
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+
+.nav-item:hover {
+    color: var(--nav-active-color);
 }

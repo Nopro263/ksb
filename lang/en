@@ -36,3 +36,5 @@ invoice:    invoice
 no-items-found:    no items were found
 phone:    phone number
 address:    address
+settings:    Settings
+account:    account

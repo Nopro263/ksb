@@ -8,7 +8,7 @@
     <style>
         html {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: x-large;
+            font-size: medium;
         }
         tr {
             break-inside: avoid;
@@ -21,15 +21,11 @@
             border: 2px solid black;
         }
         thead {
-            font-weight: bold;
+            font-size: large;
         }
 
         table {
             margin-bottom: 2rem;
-        }
-        .articles {
-            margin-left: 5%;
-            width: 90%;
         }
         thead > tr > td:not(:nth-child(2)) {
             width: fit-content;
@@ -43,6 +39,11 @@
         }
         .right {
             font-weight: bold;
+        }
+
+        .articles {
+            width: 100%;
+            page-break-after: always;
         }
 
         .article {
@@ -179,5 +180,13 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <script defer>
+        window.print();
+
+        setTimeout(() => {
+            window.close();
+        }, 500);
+    </script>
 </body>
 </html>

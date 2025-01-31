@@ -51,3 +51,8 @@ select:disabled,
     border: var(--input-disabled-border);
     color: var(--input-disabled-color)
 }
+
+.small {
+    padding: var(--margin-xxs);
+    margin: var(--margin-xxxs);
+}

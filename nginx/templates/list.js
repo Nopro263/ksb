@@ -73,6 +73,5 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 
 document.querySelector("#print").addEventListener("click", async (e) => {
     const url = await Api.get_list_print_link(id);
-    const w = window.open(url, '_blank');
-    w.focus();
+    const w = window.open(url, 'print');
 });

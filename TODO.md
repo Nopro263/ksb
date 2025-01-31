@@ -3,6 +3,7 @@
 - ~~suche~~
 - rechnungsübersicht
 - home übersicht
+- verkaufte artikel entfernen
 
 - Lieferanten daten übersicht
 - alle 500er fixen

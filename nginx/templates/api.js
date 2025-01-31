@@ -3,7 +3,8 @@ const sendApiCall = async (url, method, post_data, content_type, headers) => {
         headers = {}
     }
     headers["Content-Type"] = content_type
-    let response = await fetch("/api" + url, {
+
+    let response = await fetch("https://ksb.unser.dns64.de/api" + url, {
         method: method,
         cache: "no-store",
         headers: headers,

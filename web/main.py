@@ -21,11 +21,11 @@ app.include_router(invoice_router)
 
 @app.get("/stats")
 def stats(db: DB, auth: Auth[Clearance.EMPLOYEE]) -> StatsResponse:
-    amount_articles = db.exec(select(func.count()).where(Article.deleted == False)).one()
-    imported = db.exec(select(func.count()).where(Article.imported == True)).one()
-    sold = db.exec(select(func.count()).where(Article.invoice_id != None)).one()
-    sold_value = db.exec(select(func.sum(Article.price)).where(Article.invoice_id != None)).one()
-    total_value = db.exec(select(func.sum(Article.price)).where(Article.deleted == False)).one()
+    amount_articles = db.exec(select(func.count()).where(Article.deleted == False)).one() or 0
+    imported = db.exec(select(func.count()).where(Article.imported == True)).one() or 0
+    sold = db.exec(select(func.count()).where(Article.invoice_id != None)).one() or 0
+    sold_value = db.exec(select(func.sum(Article.price)).where(Article.invoice_id != None)).one() or 0
+    total_value = db.exec(select(func.sum(Article.price)).where(Article.deleted == False)).one() or 0
 
     return StatsResponse(
         imported=imported,

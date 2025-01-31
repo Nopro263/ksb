@@ -32,3 +32,10 @@ class ListResponse(_List):
 
 class SearchRequest(BaseModel):
     query: str
+
+class StatsResponse(BaseModel):
+    imported: int
+    amount_articles: int
+    sold: int
+    sold_value: int
+    total_value: int

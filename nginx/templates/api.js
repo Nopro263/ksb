@@ -147,6 +147,10 @@ class Api {
         return await sendAuthJSONCall("/list/" + id + "/bypass", "GET", undefined, Api.token);
     }
 
+    static async get_stats() {
+        return await sendAuthJSONCall("/stats", "GET", undefined, Api.token);
+    }
+
     static async isLoggedIn() {
         try {
             await sendAuthJSONCall("/user/me", "GET", undefined, Api.token);

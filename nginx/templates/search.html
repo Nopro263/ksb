@@ -1,0 +1,27 @@
+{% extends "base.jinja2.html" %}
+
+{% block head %}
+<script type="module" src="search.js" defer></script>
+<link rel="stylesheet" href="list.css">
+{% endblock %}
+
+{% block main %}
+<div style="margin-top: var(--margin-l)">
+    <table class="articles">
+        <h1 id="list">%result-for% "<span id="query"></span>"</h1>
+        <div>
+        <thead class="thead">
+            <tr>
+                <td>%seller%</td>
+                <td>#</td>
+                <td>%name%</td>
+                <td>%size%</td>
+                <td>%price%</td>
+                <td>%barcode%</td>
+                <td>%invoice%</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 - ~~Listen Print fixen~~
 - readme
-- suche
+- ~~suche~~
 - rechnungsübersicht
 - home übersicht
 

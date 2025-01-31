@@ -105,6 +105,10 @@ class Api {
         return await sendAuthJSONCall("/article/" + barcode + "/import", "POST", undefined, Api.token);
     }
 
+    static async search_article(query) {
+        return await sendAuthJSONCall("/article/search", "POST", {query}, Api.token);
+    }
+
     static async create_invoice() {
         return await sendAuthJSONCall("/invoice/new", "POST", undefined, Api.token);
     }

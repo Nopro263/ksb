@@ -2,14 +2,16 @@ import io
 
 from barcode.writer import SVGWriter
 from fastapi import APIRouter, HTTPException
-from sqlmodel import select
+from sqlmodel import select, col, or_
 import barcode
 from starlette.responses import Response
 from sqlalchemy.exc import NoResultFound
 
+from ..security import Auth, Clearance
+
 from ..database import DB
 from ..schema.article import Article
-from ..schema.models import ImportResponse
+from ..schema.models import ImportResponse, SearchRequest
 
 router = APIRouter(prefix="/article")
 
@@ -38,3 +40,13 @@ def import_article(db: DB, bc:int) -> ImportResponse:
     ir = ImportResponse.model_validate(article, from_attributes=True, update={"has_already_been_imported": imported})
 
     return ir
+
+@router.post("/search")
+def search_article(db: DB, auth: Auth[Clearance.EMPLOYEE], query: SearchRequest) -> list[Article]:
+    response = []
+    try:
+        response = db.exec(select(Article).where(or_(col(Article.name).contains(query.query), col(Article.size).contains(query.query), Article.barcode == query.query, Article.id_in_list == int(query.query), Article.invoice_id == int(query.query))))
+    except Exception:
+        response = db.exec(select(Article).where(or_(col(Article.name).contains(query.query), col(Article.size).contains(query.query), Article.barcode == query.query))).all()
+    
+    return response

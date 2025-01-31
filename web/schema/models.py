@@ -29,3 +29,6 @@ from .list import _List
 
 class ListResponse(_List):
     articles: L[Article]
+
+class SearchRequest(BaseModel):
+    query: str

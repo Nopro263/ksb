@@ -20,6 +20,7 @@ services:
       DB_TYPE: postgresql+psycopg2
       SECRET: ${SECRET}
       COUNT_IN_YEAR: ${COUNT_IN_YEAR}
+      ACCESS_TOKEN: ${ACCESS_TOKEN}
     
     volumes:
       - ./web:/app:ro

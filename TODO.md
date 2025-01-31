@@ -1,5 +1,5 @@
 - ~~Listen Print fixen~~
-- readme
+- ~~readme~~
 - ~~suche~~
 - rechnungsübersicht
 - home übersicht
@@ -7,6 +7,6 @@
 
 - Lieferanten daten übersicht
 - alle 500er fixen
-- Lieferantenübersicht öffnen button kleiner
+- ~~Lieferantenübersicht öffnen button kleiner~~
 - tutorial?
 - ~~sprachen switcher~~

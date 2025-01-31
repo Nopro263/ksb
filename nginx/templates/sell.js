@@ -44,6 +44,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
             sum.innerHTML = parseInt(sum.innerHTML.substring(0, sum.innerHTML.length-1)) + article.price + "€"
         }
 
+        barcode.value = "";
         barcode.focus();
     } catch({response, json}) {
         msg.innerHTML = "Error: " + json.detail;

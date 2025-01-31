@@ -3,7 +3,7 @@ The Kindersachenbörse is a bi-annually second hand shop in Austria, where peopl
 
 # Why this software?
 Due to logistical requirements, the people that bring items (the sellers) must tell us beforehand what these items will be.
-The currently used software is a bunch of old php scripts that lack some important features, so I've rewritten the complete software in python.
+The currently used software is a bunch of old php scripts that lack some important features (e.g. multiple languages), so I've rewritten the complete software in python.
 
 # What does this software do?
 This software is split into two parts: the seller part and the employee part.\

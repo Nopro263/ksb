@@ -10,6 +10,9 @@
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             font-size: x-large;
         }
+        tr {
+            break-inside: avoid;
+        }
         table {
             border-collapse: collapse;
             width: 50vw;
@@ -58,6 +61,7 @@
 
         .article > .name {
             border-bottom: 2px solid black;
+            font-weight: bold;
         }
 
         .article > .middle {
@@ -120,7 +124,7 @@
             {% for article in articles %}
             <tr {% if article.deleted %}class="deleted"{% endif %}>
                 <td>{{ article.id_in_list }}</td>
-                <td>{{ article.name }}</td>
+                <td>{% if article.deleted %}x-X-x{% endif %} {{ article.name }} {% if article.deleted %}x-X-x{% endif %}</td>
                 <td>{{ article.barcode }}</td>
                 <td>{{ article.size }}</td>
                 <td>{{ article.price }}€</td>

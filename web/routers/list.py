@@ -119,7 +119,7 @@ def get_print_list_link(db: DB, auth: Auth[Clearance.REGISTERED], listId: int, r
 def print_list(db: DB, listId: int, secret: str, request: Request) -> HTMLResponse:
     if listId not in secrets or secrets[listId] != secret:
         raise HTTPException(status_code=403, detail="invalid print secret")
-    del secrets[listId]
+    #del secrets[listId]
 
     list = db.exec(select(List).where(List.id == listId)).one()
     user = db.exec(select(User).where(User.id == list.owner_id)).one()

@@ -71,7 +71,7 @@ def get_print_invoice_link(db: DB, auth: Auth[Clearance.EMPLOYEE], id: int, requ
 def print_invoice(db: DB, id: int, secret: str, request: Request) -> HTMLResponse:
     if id not in secrets or secrets[id] != secret:
         raise HTTPException(status_code=403, detail="invalid print secret")
-    del secrets[id]
+    #del secrets[id]
 
     invoice = db.exec(select(Invoice).where(Invoice.id == id)).one()
     articles = db.exec(select(Article).where(Article.invoice_id == id)).all()

@@ -104,6 +104,11 @@ async def deleteArticle(db: DB, listId: int, articleId: int, auth: Auth[Clearanc
 
     return "ok"
 
+@router.get("/{listId:int}/print/bypass")
+def get_print_list_link(db: DB, auth: Auth[Clearance.EMPLOYEE], listId: int, request: Request) -> str:
+    s = hashlib.sha256(f"{listId}{os.environ['SECRET']}".encode("utf-8")).hexdigest()
+    secrets[listId] = s
+    return str(request.url_for("print_list", listId=listId, secret=s))
 
 @router.get("/{listId:int}/print")
 def get_print_list_link(db: DB, auth: Auth[Clearance.REGISTERED], listId: int, request: Request) -> str:

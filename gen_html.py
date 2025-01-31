@@ -54,7 +54,7 @@ def translate():
                 template = env.get_template(file)
                 output_from_parsed_template = template.render()
 
-                ms = re.findall(r"%(.*?)%", output_from_parsed_template)
+                ms = re.findall(r"%([^ ]*?)%", output_from_parsed_template)
                 for m in ms:
                     if m not in translations:
                         translations.append(m)
@@ -62,7 +62,7 @@ def translate():
         
         with open(os.path.join(templates, file), "rb") as f:
             d = f.read()
-            ms = re.findall(r"%(.*?)%".encode("utf-8"), d)
+            ms = re.findall(r"%([^ ]*?)%".encode("utf-8"), d)
             for m in ms:
                 if m not in translations:
                     translations.append(m.decode("utf-8"))
@@ -137,7 +137,7 @@ elif len(sys.argv) >= 2 and sys.argv[1] == "generate":
                 template = env.get_template(file)
                 output_from_parsed_template = template.render()
 
-                ms = re.findall(r"%(.*?)%", output_from_parsed_template)
+                ms = re.findall(r"%([^ ]*?)%", output_from_parsed_template)
                 for m in ms:
                     if m not in translations:
                         translations.append(m)
@@ -145,7 +145,7 @@ elif len(sys.argv) >= 2 and sys.argv[1] == "generate":
         
         with open(os.path.join(templates, file), "rb") as f:
             d = f.read()
-            ms = re.findall(r"%(.*?)%".encode("utf-8"), d)
+            ms = re.findall(r"%([^ ]*?)%".encode("utf-8"), d)
             for m in ms:
                 if m not in translations:
                     translations.append(m.decode("utf-8"))

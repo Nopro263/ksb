@@ -16,8 +16,8 @@ if(await Api.isLoggedIn()) {
                     <a class="nav-item" id="settings" href="/settings">%settings%</a>
                     <div class="nav-item" id="logout">%logout%</div>
                     <div class="nav-item row">
-                        <button id="lang-de">DE</button>
-                        <button id="lang-en">EN</button>
+                        <button id="lang-de">🇩🇪</button>
+                        <button id="lang-en">🇬🇧</button>
                     </div>
                 </div>
             </div>

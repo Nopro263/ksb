@@ -23,12 +23,12 @@ result.forEach(async (article) => {
     }
 
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${seller.nickname} ${c(list.id_in_user)}</td>
+    tr.innerHTML = `<td><a href="/seller?id=${seller.id}" class="highlight">${seller.nickname} ${c(list.id_in_user)}</a></td>
                 <td>${article.id_in_list}</td>
                 <td>${c(article.name)}</td>
                 <td>${c(article.size)}</td>
                 <td>${article.price}€</td>
                 <td>${c(article.barcode)}</td>
-                <td>${article.invoice_id ? c(article.invoice_id) : ""}</td>`;
+                <td>${article.invoice_id ? `<a href="/sell?id=${article.invoice_id}" class="highlight">${c(article.invoice_id)}</a>` : ""}</td>`;
     table.appendChild(tr);
 });

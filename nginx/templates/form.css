@@ -34,10 +34,10 @@ select:hover,
     border: var(--input-hover-border);
 }
 
-input:active, input:focus,
-button:active, button:focus,
-select:active, select:focus,
-.button:active, .button:focus {
+input:active, input:focus, input.active,
+button:active, button:focus, button.active,
+select:active, select:focus, select.active,
+.button:active, .button:focus, .button.active {
     background-color: var(--input-active-background);
     border: var(--input-active-border);
 }

@@ -52,7 +52,7 @@ nav .nav-dropdown > .nav-items {
     margin-top: calc(var(--margin-m) + 2px);
     right: calc(-1 * var(--margin-m) - 2px);
 
-    width: 5rem;
+    width: 6rem;
 
     border: var(--border);
 

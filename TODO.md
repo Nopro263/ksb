@@ -1,4 +1,4 @@
-- Listen Print fixen
+- ~~Listen Print fixen~~
 - readme
 - suche
 - rechnungsübersicht
@@ -8,4 +8,4 @@
 - alle 500er fixen
 - Lieferantenübersicht öffnen button kleiner
 - tutorial?
-- sprachen switcher
+- ~~sprachen switcher~~

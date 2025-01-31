@@ -15,6 +15,10 @@ if(await Api.isLoggedIn()) {
                 <div class="nav-items">
                     <a class="nav-item" id="settings" href="/settings">%settings%</a>
                     <div class="nav-item" id="logout">%logout%</div>
+                    <div class="nav-item row">
+                        <button id="lang-de">DE</button>
+                        <button id="lang-en">EN</button>
+                    </div>
                 </div>
             </div>
         </div>`
@@ -32,4 +36,39 @@ const nav_component = document.querySelector(`a.nav-component[href="${window.loc
 
 if(nav_component) {
     nav_component.classList.add("active");
+}
+
+const lang = {}
+
+lang["de"] = document.querySelector("#lang-de");
+lang["en"] = document.querySelector("#lang-en");
+
+const setLang = (lang) => {
+    document.cookie = "language=" + lang;
+
+    window.location.reload();
+}
+
+const getCookieValue = (name) => { // https://stackoverflow.com/a/25490531
+    return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
+}
+
+const getLang = () => {
+    const value = getCookieValue("language");
+    const lang = navigator.language || navigator.userLanguage;
+    return value || lang;
+}
+
+lang["de"].addEventListener("click", () => {
+    setLang("de");
+});
+
+lang["en"].addEventListener("click", () => {
+    setLang("en");
+});
+
+const l = getLang();
+console.log(lang[l]);
+if(lang[l]) {
+    lang[l].classList.add("active");
 }

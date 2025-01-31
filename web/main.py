@@ -36,7 +36,7 @@ def stats(db: DB, auth: Auth[Clearance.EMPLOYEE]) -> StatsResponse:
         total_value=total_value
     )
 
-@app.get("/display/")
+@app.get("/display")
 def stats(db: DB, token: str) -> StatsResponse:
     if(token != os.environ["ACCESS_TOKEN"]):
         raise HTTPException(status_code=403, detail="not allowed")

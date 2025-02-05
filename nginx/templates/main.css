@@ -67,12 +67,12 @@
 
 html:not(:has(.scrolling-body)) {
     height: 100%;
-    width: 100%;
+    width: calc(100% - 8px);
 }
 
 body:not(.scrolling-body) {
     height: 100%;
-    width: 100%;
+    width: calc(100% - 8px);
     display: flex;
     flex-direction: column;
 }
@@ -80,7 +80,7 @@ body:not(.scrolling-body) {
 body:not(.scrolling-body) > main {
     display: flex;
     height: 100%;
-    width: 100%;
+    width: calc(100% - 8px);
 
     justify-content: center;
 }
